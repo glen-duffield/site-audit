@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-09 09:39 UTC",
+  "generated_at": "2026-05-09 09:42 UTC",
   "results": [
     {
       "domain": "agenticintelligence.co.nz",
-      "fetched_at": "2026-05-09T09:39:06.653758+00:00",
+      "fetched_at": "2026-05-09T09:42:47.928523+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
@@ -31,7 +31,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://agenticintelligence.co.nz/this-page-does-not-exist-1778319546"
+          "external_url": "https://agenticintelligence.co.nz/this-page-does-not-exist-1778319768"
         },
         "6_title": {
           "status": "pass",
@@ -202,7 +202,7 @@
     },
     {
       "domain": "adiso.co.nz",
-      "fetched_at": "2026-05-09T09:39:06.654566+00:00",
+      "fetched_at": "2026-05-09T09:42:47.929360+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
@@ -230,7 +230,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://adiso.co.nz/this-page-does-not-exist-1778319547"
+          "external_url": "https://adiso.co.nz/this-page-does-not-exist-1778319768"
         },
         "6_title": {
           "status": "pass",
@@ -397,7 +397,7 @@
     },
     {
       "domain": "xos.co.nz",
-      "fetched_at": "2026-05-09T09:39:06.655041+00:00",
+      "fetched_at": "2026-05-09T09:42:47.929875+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
@@ -425,7 +425,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://xos.co.nz/this-page-does-not-exist-1778319546"
+          "external_url": "https://xos.co.nz/this-page-does-not-exist-1778319768"
         },
         "6_title": {
           "status": "pass",
@@ -600,7 +600,7 @@
     },
     {
       "domain": "buildfoundry.co.nz",
-      "fetched_at": "2026-05-09T09:39:06.655679+00:00",
+      "fetched_at": "2026-05-09T09:42:47.930749+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
@@ -628,7 +628,7 @@
           "status": "fail",
           "message": "Missing pages return HTTP 200 (soft 404)",
           "fix": "Configure server/framework to return proper 404 status codes.",
-          "external_url": "https://buildfoundry.co.nz/this-page-does-not-exist-1778319547"
+          "external_url": "https://buildfoundry.co.nz/this-page-does-not-exist-1778319768"
         },
         "6_title": {
           "status": "pass",
@@ -791,7 +791,7 @@
     },
     {
       "domain": "workable.co.nz",
-      "fetched_at": "2026-05-09T09:39:07.763859+00:00",
+      "fetched_at": "2026-05-09T09:42:48.621285+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
@@ -819,7 +819,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://workable.co.nz/this-page-does-not-exist-1778319548"
+          "external_url": "https://workable.co.nz/this-page-does-not-exist-1778319768"
         },
         "6_title": {
           "status": "pass",
@@ -999,7 +999,7 @@
     },
     {
       "domain": "takeoffqs.com",
-      "fetched_at": "2026-05-09T09:39:07.766191+00:00",
+      "fetched_at": "2026-05-09T09:42:48.623327+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
@@ -1205,7 +1205,7 @@
     },
     {
       "domain": "trafficsense.co.nz",
-      "fetched_at": "2026-05-09T09:39:08.045573+00:00",
+      "fetched_at": "2026-05-09T09:42:49.304303+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
@@ -1233,7 +1233,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://trafficsense.co.nz/this-page-does-not-exist-1778319548"
+          "external_url": "https://trafficsense.co.nz/this-page-does-not-exist-1778319769"
         },
         "6_title": {
           "status": "warn",
@@ -1400,7 +1400,7 @@
     },
     {
       "domain": "trafficsense.com.au",
-      "fetched_at": "2026-05-09T09:39:08.369341+00:00",
+      "fetched_at": "2026-05-09T09:42:49.320318+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
@@ -1428,7 +1428,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://trafficsense.com.au/this-page-does-not-exist-1778319548"
+          "external_url": "https://trafficsense.com.au/this-page-does-not-exist-1778319769"
         },
         "6_title": {
           "status": "warn",
@@ -1595,7 +1595,7 @@
     },
     {
       "domain": "camba.ai",
-      "fetched_at": "2026-05-09T09:39:08.463976+00:00",
+      "fetched_at": "2026-05-09T09:42:49.513077+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
@@ -1623,7 +1623,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://camba.ai/this-page-does-not-exist-1778319548"
+          "external_url": "https://camba.ai/this-page-does-not-exist-1778319769"
         },
         "6_title": {
           "status": "pass",
@@ -1791,7 +1791,7 @@
     },
     {
       "domain": "thatch.cloud",
-      "fetched_at": "2026-05-09T09:39:08.557181+00:00",
+      "fetched_at": "2026-05-09T09:42:49.724438+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
