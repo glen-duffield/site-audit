@@ -2,8 +2,8 @@ name: Site audit
 
 on:
   schedule:
-    # Sunday 21:00 UTC = Monday 09:00 NZST (winter) / 10:00 NZDT (summer)
-    - cron: "0 21 * * 0"
+    # Daily 19:00 UTC = 7am NZST (winter) / 8am NZDT (summer)
+    - cron: "0 19 * * *"
   workflow_dispatch: # allow manual trigger via the Actions tab
 
 permissions:
@@ -37,6 +37,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit (audit produced same results as last run)"
           else
-            git commit -m "Weekly audit run — $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git commit -m "Daily audit run — $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           fi

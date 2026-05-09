@@ -463,16 +463,10 @@ body {
 <!-- Refresh instructions modal -->
 <div class="modal-bg" id="refresh-modal-bg" onclick="if(event.target===this)closeModalById('refresh-modal-bg')">
   <div class="modal" style="max-width: 580px;">
-    <h2>How to refresh the audit data</h2>
-    <div class="sub">The audit runs locally on your Mac (the cowork sandbox can't reach external sites). Two steps:</div>
-    <p style="font-weight: 500; margin: 14px 0 4px;">1. Run the audit in Terminal</p>
-    <div class="refresh-cmd">cd ~/Documents &amp;&amp; python3 marketing-audit.py</div>
-    <button class="btn primary" onclick="copyText('cd ~/Documents &amp;&amp; python3 marketing-audit.py')">Copy command</button>
-    <p style="font-weight: 500; margin: 18px 0 4px;">2. Tell Claude in chat to refresh the dashboard</p>
-    <div class="sub">Say something like: <em>"refresh the audit dashboard with the latest data"</em>. Claude reads the new JSON and updates this artifact.</div>
-    <p style="font-weight: 500; margin: 18px 0 4px;">Optional: one-time alias setup</p>
-    <div class="refresh-cmd">echo 'alias audit="cd ~/Documents &amp;&amp; python3 marketing-audit.py"' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</div>
-    <div class="help-text">After that, you can just type <code>audit</code> in Terminal each week.</div>
+    <h2>How the audit refreshes</h2>
+    <div class="sub">The audit runs automatically on GitHub Actions every day at ~7am NZ time. No action needed from you.</div>
+    <p style="font-weight: 500; margin: 14px 0 4px;">Want to regenerate now?</p>
+    <div class="sub">Click the <strong>Regenerate data</strong> button on the dashboard — it opens the GitHub Actions page where you click <em>Run workflow</em> to kick off an immediate run (takes about 20 seconds).</div>
     <div class="actions"><button class="btn primary" onclick="closeModalById('refresh-modal-bg')">Got it</button></div>
   </div>
 </div>
@@ -915,7 +909,7 @@ function commonHeaderHTML(opts) {
         <div class="meta">${opts.lastRun ? "Last audit: " + esc(fmtDate(opts.lastRun)) : "Not audited yet"}</div>
       </div>
       <div class="actions">
-        <button class="btn" onclick="showRefreshInstructions()">How to refresh data</button>
+        <a class="btn" href="https://github.com/glen-duffield/site-audit/actions/workflows/audit.yml" target="_blank" rel="noopener" title="Opens the GitHub Actions page — click 'Run workflow' there to regenerate now. Otherwise it auto-runs daily at ~7am NZ time.">Regenerate data</a>
         <button class="btn primary" onclick="openAddDomain()">+ Add domain</button>
       </div>
     </div>
@@ -1199,7 +1193,7 @@ function renderDomainCard(domain, result, brandName, filter) {
           </div>
         </div>
         <div class="detail" style="padding: 14px 20px 18px; color: var(--muted); font-size: 13px;">
-          Run the audit script to scan this domain. Click <strong>How to refresh data</strong> above for the command.
+          New domain — it'll be scanned on the next audit run (daily at ~7am NZ time, or click <strong>Regenerate data</strong> above to trigger one now).
         </div>
       </div>
     `;
