@@ -35,6 +35,13 @@
         "pass": 24,
         "warn": 2,
         "fail": 1
+      },
+      {
+        "date": "2026-05-09",
+        "percent": 89,
+        "pass": 24,
+        "warn": 2,
+        "fail": 1
       }
     ],
     "adiso.co.nz": [
@@ -68,6 +75,13 @@
       },
       {
         "date": "2026-05-08",
+        "percent": 85,
+        "pass": 23,
+        "warn": 4,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-09",
         "percent": 85,
         "pass": 23,
         "warn": 4,
@@ -109,6 +123,13 @@
         "pass": 24,
         "warn": 3,
         "fail": 0
+      },
+      {
+        "date": "2026-05-09",
+        "percent": 89,
+        "pass": 24,
+        "warn": 3,
+        "fail": 0
       }
     ],
     "buildfoundry.co.nz": [
@@ -142,6 +163,13 @@
       },
       {
         "date": "2026-05-08",
+        "percent": 42,
+        "pass": 11,
+        "warn": 9,
+        "fail": 6
+      },
+      {
+        "date": "2026-05-09",
         "percent": 42,
         "pass": 11,
         "warn": 9,
@@ -183,6 +211,13 @@
         "pass": 25,
         "warn": 1,
         "fail": 1
+      },
+      {
+        "date": "2026-05-09",
+        "percent": 93,
+        "pass": 25,
+        "warn": 1,
+        "fail": 1
       }
     ],
     "takeoffqs.com": [
@@ -216,6 +251,13 @@
       },
       {
         "date": "2026-05-08",
+        "percent": 100,
+        "pass": 27,
+        "warn": 0,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-09",
         "percent": 100,
         "pass": 27,
         "warn": 0,
@@ -257,6 +299,13 @@
         "pass": 14,
         "warn": 9,
         "fail": 3
+      },
+      {
+        "date": "2026-05-09",
+        "percent": 54,
+        "pass": 14,
+        "warn": 9,
+        "fail": 3
       }
     ],
     "trafficsense.com.au": [
@@ -294,6 +343,13 @@
         "pass": 16,
         "warn": 7,
         "fail": 3
+      },
+      {
+        "date": "2026-05-09",
+        "percent": 62,
+        "pass": 16,
+        "warn": 7,
+        "fail": 3
       }
     ],
     "camba.ai": [
@@ -324,6 +380,13 @@
         "pass": 20,
         "warn": 5,
         "fail": 1
+      },
+      {
+        "date": "2026-05-09",
+        "percent": 77,
+        "pass": 20,
+        "warn": 5,
+        "fail": 1
       }
     ],
     "thatch.cloud": [
@@ -336,6 +399,13 @@
       },
       {
         "date": "2026-05-08",
+        "percent": 100,
+        "pass": 27,
+        "warn": 0,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-09",
         "percent": 100,
         "pass": 27,
         "warn": 0,

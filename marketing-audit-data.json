@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-05-08 01:32 UTC",
+  "generated_at": "2026-05-09 09:29 UTC",
   "results": [
     {
       "domain": "agenticintelligence.co.nz",
-      "fetched_at": "2026-05-08T01:31:44.896235+00:00",
+      "fetched_at": "2026-05-09T09:29:10.152763+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
-          "message": "HTTPS works. Cert expires in 88 days (Aug  4 04:47:33 2026 GMT)",
+          "message": "HTTPS works. Cert expires in 86 days (Aug  4 04:47:33 2026 GMT)",
           "fix": ""
         },
         "2_robots": {
@@ -31,7 +31,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://agenticintelligence.co.nz/this-page-does-not-exist-1778203905"
+          "external_url": "https://agenticintelligence.co.nz/this-page-does-not-exist-1778318950"
         },
         "6_title": {
           "status": "pass",
@@ -202,11 +202,11 @@
     },
     {
       "domain": "adiso.co.nz",
-      "fetched_at": "2026-05-08T01:31:44.896623+00:00",
+      "fetched_at": "2026-05-09T09:29:10.153607+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
-          "message": "HTTPS works. Cert expires in 71 days (Jul 18 20:00:31 2026 GMT)",
+          "message": "HTTPS works. Cert expires in 70 days (Jul 18 20:00:31 2026 GMT)",
           "fix": ""
         },
         "2_robots": {
@@ -230,7 +230,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://adiso.co.nz/this-page-does-not-exist-1778203906"
+          "external_url": "https://adiso.co.nz/this-page-does-not-exist-1778318951"
         },
         "6_title": {
           "status": "pass",
@@ -397,11 +397,11 @@
     },
     {
       "domain": "xos.co.nz",
-      "fetched_at": "2026-05-08T01:31:44.896701+00:00",
+      "fetched_at": "2026-05-09T09:29:10.154099+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
-          "message": "HTTPS works. Cert expires in 85 days (Aug  1 21:43:21 2026 GMT)",
+          "message": "HTTPS works. Cert expires in 84 days (Aug  1 21:43:21 2026 GMT)",
           "fix": ""
         },
         "2_robots": {
@@ -425,7 +425,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://xos.co.nz/this-page-does-not-exist-1778203905"
+          "external_url": "https://xos.co.nz/this-page-does-not-exist-1778318950"
         },
         "6_title": {
           "status": "pass",
@@ -600,11 +600,11 @@
     },
     {
       "domain": "buildfoundry.co.nz",
-      "fetched_at": "2026-05-08T01:31:44.896771+00:00",
+      "fetched_at": "2026-05-09T09:29:10.154690+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
-          "message": "HTTPS works. Cert expires in 60 days (Jul  8 00:53:13 2026 GMT)",
+          "message": "HTTPS works. Cert expires in 59 days (Jul  8 00:53:13 2026 GMT)",
           "fix": ""
         },
         "2_robots": {
@@ -628,7 +628,7 @@
           "status": "fail",
           "message": "Missing pages return HTTP 200 (soft 404)",
           "fix": "Configure server/framework to return proper 404 status codes.",
-          "external_url": "https://buildfoundry.co.nz/this-page-does-not-exist-1778203911"
+          "external_url": "https://buildfoundry.co.nz/this-page-does-not-exist-1778318951"
         },
         "6_title": {
           "status": "pass",
@@ -791,16 +791,16 @@
     },
     {
       "domain": "workable.co.nz",
-      "fetched_at": "2026-05-08T01:31:48.614589+00:00",
+      "fetched_at": "2026-05-09T09:29:11.489417+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
-          "message": "HTTPS works. Cert expires in 80 days (Jul 27 20:42:56 2026 GMT)",
+          "message": "HTTPS works. Cert expires in 79 days (Jul 27 20:42:56 2026 GMT)",
           "fix": ""
         },
         "2_robots": {
           "status": "pass",
-          "message": "robots.txt found (1774 bytes)",
+          "message": "robots.txt found (1834 bytes)",
           "fix": "",
           "external_url": "https://workable.co.nz/robots.txt"
         },
@@ -819,7 +819,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://workable.co.nz/this-page-does-not-exist-1778203909"
+          "external_url": "https://workable.co.nz/this-page-does-not-exist-1778318951"
         },
         "6_title": {
           "status": "pass",
@@ -999,11 +999,11 @@
     },
     {
       "domain": "takeoffqs.com",
-      "fetched_at": "2026-05-08T01:31:48.614848+00:00",
+      "fetched_at": "2026-05-09T09:29:11.499871+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
-          "message": "HTTPS works. Cert expires in 75 days (Jul 22 23:31:38 2026 GMT)",
+          "message": "HTTPS works. Cert expires in 74 days (Jul 22 23:31:38 2026 GMT)",
           "fix": ""
         },
         "2_robots": {
@@ -1205,11 +1205,11 @@
     },
     {
       "domain": "trafficsense.co.nz",
-      "fetched_at": "2026-05-08T01:31:51.397903+00:00",
+      "fetched_at": "2026-05-09T09:29:12.278326+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
-          "message": "HTTPS works. Cert expires in 87 days (Aug  3 04:08:02 2026 GMT)",
+          "message": "HTTPS works. Cert expires in 85 days (Aug  3 04:08:02 2026 GMT)",
           "fix": ""
         },
         "2_robots": {
@@ -1233,7 +1233,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://trafficsense.co.nz/this-page-does-not-exist-1778203912"
+          "external_url": "https://trafficsense.co.nz/this-page-does-not-exist-1778318952"
         },
         "6_title": {
           "status": "warn",
@@ -1400,11 +1400,11 @@
     },
     {
       "domain": "trafficsense.com.au",
-      "fetched_at": "2026-05-08T01:31:51.839802+00:00",
+      "fetched_at": "2026-05-09T09:29:12.372020+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
-          "message": "HTTPS works. Cert expires in 84 days (Jul 31 20:31:12 2026 GMT)",
+          "message": "HTTPS works. Cert expires in 83 days (Jul 31 20:31:12 2026 GMT)",
           "fix": ""
         },
         "2_robots": {
@@ -1428,7 +1428,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://trafficsense.com.au/this-page-does-not-exist-1778203912"
+          "external_url": "https://trafficsense.com.au/this-page-does-not-exist-1778318952"
         },
         "6_title": {
           "status": "warn",
@@ -1595,11 +1595,11 @@
     },
     {
       "domain": "camba.ai",
-      "fetched_at": "2026-05-08T01:31:53.622135+00:00",
+      "fetched_at": "2026-05-09T09:29:12.816306+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
-          "message": "HTTPS works. Cert expires in 87 days (Aug  3 20:57:41 2026 GMT)",
+          "message": "HTTPS works. Cert expires in 86 days (Aug  3 20:57:41 2026 GMT)",
           "fix": ""
         },
         "2_robots": {
@@ -1623,7 +1623,7 @@
           "status": "warn",
           "message": "404 status but page is minimal",
           "fix": "Design a branded 404 with navigation back to key pages.",
-          "external_url": "https://camba.ai/this-page-does-not-exist-1778203914"
+          "external_url": "https://camba.ai/this-page-does-not-exist-1778318953"
         },
         "6_title": {
           "status": "pass",
@@ -1791,11 +1791,11 @@
     },
     {
       "domain": "thatch.cloud",
-      "fetched_at": "2026-05-08T01:31:54.419783+00:00",
+      "fetched_at": "2026-05-09T09:29:13.239330+00:00",
       "checks": {
         "1_https_ssl": {
           "status": "pass",
-          "message": "HTTPS works. Cert expires in 89 days (Aug  5 20:53:50 2026 GMT)",
+          "message": "HTTPS works. Cert expires in 88 days (Aug  5 20:53:50 2026 GMT)",
           "fix": ""
         },
         "2_robots": {

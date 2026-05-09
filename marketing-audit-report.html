@@ -1,0 +1,1587 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Marketing audit report</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+    --bg: #fafaf7;
+    --card: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #6b6b66;
+    --line: #e8e6e0;
+    --pass: #2d7a4f;
+    --pass-bg: #e8f5ee;
+    --warn: #b86d00;
+    --warn-bg: #fdf3e3;
+    --fail: #b8392f;
+    --fail-bg: #fbe9e7;
+    --skip: #888;
+    --skip-bg: #efefea;
+    color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0; padding: 32px 20px; background: var(--bg); color: var(--ink);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+.container { max-width: 1100px; margin: 0 auto; }
+header { margin-bottom: 28px; }
+h1 { font-size: 26px; margin: 0 0 6px; font-weight: 600; letter-spacing: -0.01em; }
+.sub { color: var(--muted); font-size: 14px; }
+.cards { display: flex; flex-direction: column; gap: 14px; }
+.card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    overflow: hidden;
+}
+.card summary {
+    list-style: none; cursor: pointer; padding: 18px 22px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.card summary::-webkit-details-marker { display: none; }
+.card .domain { display: flex; align-items: baseline; gap: 14px; min-width: 0; }
+.card .name { font-size: 17px; font-weight: 600; }
+.card .score {
+    font-size: 22px; font-weight: 700; padding: 2px 10px; border-radius: 6px;
+    font-variant-numeric: tabular-nums;
+}
+.card .score.ok  { background: var(--pass-bg); color: var(--pass); }
+.card .score.warn { background: var(--warn-bg); color: var(--warn); }
+.card .score.bad { background: var(--fail-bg); color: var(--fail); }
+.card .meta { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill {
+    font-size: 12px; padding: 3px 9px; border-radius: 999px; font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+.pill.pass { background: var(--pass-bg); color: var(--pass); }
+.pill.warn { background: var(--warn-bg); color: var(--warn); }
+.pill.fail { background: var(--fail-bg); color: var(--fail); }
+.pill.skip { background: var(--skip-bg); color: var(--skip); }
+.card .body { padding: 0 22px 18px; border-top: 1px solid var(--line); }
+.section { margin-top: 18px; }
+.section h3 {
+    font-size: 13px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--muted); margin: 0 0 6px;
+}
+.section table { width: 100%; border-collapse: collapse; }
+.section td { padding: 10px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.section td:first-child { width: 70px; padding-right: 8px; }
+.status {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.status.pass { background: var(--pass-bg); color: var(--pass); }
+.status.warn { background: var(--warn-bg); color: var(--warn); }
+.status.fail { background: var(--fail-bg); color: var(--fail); }
+.status.skip { background: var(--skip-bg); color: var(--skip); }
+.msg { color: var(--ink); margin-top: 2px; font-size: 14px; }
+.fix {
+    color: var(--muted); margin-top: 4px; font-size: 13px;
+    border-left: 2px solid var(--line); padding-left: 10px;
+}
+footer { margin-top: 28px; color: var(--muted); font-size: 13px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Marketing audit</h1>
+        <div class="sub">Generated 2026-05-09 09:29 UTC</div>
+    </header>
+    <div class="cards">
+        <details class="card ok" open>
+            <summary>
+                <div class="domain">
+                    <span class="name">agenticintelligence.co.nz</span>
+                    <span class="score ok">89%</span>
+                </div>
+                <div class="meta">
+                    <span class="pill pass">24 pass</span>
+                    <span class="pill warn">2 warn</span>
+                    <span class="pill fail">1 fail</span>
+                    
+                </div>
+            </summary>
+            <div class="body">
+            <div class="section">
+                <h3>Discoverability</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>HTTPS + SSL cert</strong><div class="msg">HTTPS works. Cert expires in 86 days (Aug  4 04:47:33 2026 GMT)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>robots.txt</strong><div class="msg">robots.txt found (85 bytes)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>sitemap.xml</strong><div class="msg">Sitemap at https://agenticintelligence.co.nz/sitemap-index.xml (referenced in robots.txt)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Canonical URL</strong><div class="msg">Canonical: https://agenticintelligence.co.nz/</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Custom 404 page</strong><div class="msg">404 status but page is minimal</div><div class="fix">Design a branded 404 with navigation back to key pages.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>On-page SEO</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Title tag</strong><div class="msg">Title (55 chars): Agentic Intelligence — Building and scaling AI ventures</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Meta description</strong><div class="msg">(159 chars): Agentic Intelligence builds AI-native ventures from concept to scale — across construction, financial advice, sales and frontline workforces. Christchurch, NZ.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Single H1</strong><div class="msg">One H1: Agentic Intelligence — Building and scaling AI ventures</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Heading hierarchy</strong><div class="msg">10 headings, hierarchy clean</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Image alt text</strong><div class="msg">All 1 images have alt attributes (0 marked decorative)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Social sharing</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>OpenGraph tags</strong><div class="msg">All 4 core OG tags present</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>og:image loads</strong><div class="msg">og:image loads (image/png)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Twitter card</strong><div class="msg">twitter:card = summary_large_image</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>LinkedIn preview</strong><div class="msg">LinkedIn-ready (uses OG tags)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Structured data</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema present</strong><div class="msg">JSON-LD schema found: ?</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema valid</strong><div class="msg">All 1 JSON-LD blocks parse cleanly</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Performance + trust</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Page weight</strong><div class="msg">Homepage HTML: 14 KB</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Mobile viewport</strong><div class="msg">Mobile viewport set</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Favicon</strong><div class="msg">1 icon link(s), apple-touch-icon, theme-color #384863</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Security headers</strong><div class="msg">All 3 core security headers set</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Other</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>21_apex_www_redirect</strong><div class="msg">www → apex (301 redirect). Live URL: agenticintelligence.co.nz</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>22_http_https_redirect</strong><div class="msg">http:// serves content directly (no redirect to https)</div><div class="fix">Force HTTPS at your CDN. Cloudflare: SSL/TLS → Edge Certificates → toggle &#39;Always Use HTTPS&#39;.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>23_html_lang</strong><div class="msg">lang=&quot;en&quot;</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>24_meta_robots</strong><div class="msg">No restrictive robots directive (default = index, follow)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>25_email_dns</strong><div class="msg">SPF + DMARC both present (DMARC: v=DMARC1; p=none; pct=100; rua=mailto:re+c9madxyuqls@dmarc.p…)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>26_placeholder_text</strong><div class="msg">No placeholder text detected</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>27_linkedin_insight</strong><div class="msg">GTM detected (GTM-TFQDH7X8) but no LinkedIn Insight signals in container</div><div class="fix">Add LinkedIn Insight via GTM → New Tag → Tag Type: &#39;LinkedIn Insight&#39;. Get the partner ID from LinkedIn Campaign Manager → Account Assets → Insight Tag. Skip this check if you don&#39;t run LinkedIn Ads.</div></td>
+                </tr></table>
+            </div></div>
+        </details>
+    
+        <details class="card ok" open>
+            <summary>
+                <div class="domain">
+                    <span class="name">adiso.co.nz</span>
+                    <span class="score ok">85%</span>
+                </div>
+                <div class="meta">
+                    <span class="pill pass">23 pass</span>
+                    <span class="pill warn">4 warn</span>
+                    <span class="pill fail">0 fail</span>
+                    
+                </div>
+            </summary>
+            <div class="body">
+            <div class="section">
+                <h3>Discoverability</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>HTTPS + SSL cert</strong><div class="msg">HTTPS works. Cert expires in 70 days (Jul 18 20:00:31 2026 GMT)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>robots.txt</strong><div class="msg">robots.txt found (278 bytes)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>sitemap.xml</strong><div class="msg">Sitemap at https://adiso.co.nz/sitemap.xml (referenced in robots.txt)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Canonical URL</strong><div class="msg">Canonical: https://adiso.co.nz/</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Custom 404 page</strong><div class="msg">404 status but page is minimal</div><div class="fix">Design a branded 404 with navigation back to key pages.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>On-page SEO</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Title tag</strong><div class="msg">Title (51 chars): Adiso – Financial Advisory Platform for NZ Advisers</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Meta description</strong><div class="msg">(140 chars): Adiso is a purpose-built financial advisory platform for New Zealand advisers. CRM, compliance, KiwiSaver tools and more — all in one place.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Single H1</strong><div class="msg">One H1: The
+    AI
+    Operating
+    
+    System
+  
+  
+    for
+    
+    Financial
+    Ad</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Heading hierarchy</strong><div class="msg">21 headings, hierarchy clean</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Image alt text</strong><div class="msg">All 17 images have alt attributes (0 marked decorative)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Social sharing</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>OpenGraph tags</strong><div class="msg">All 4 core OG tags present</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>og:image loads</strong><div class="msg">og:image loads (image/jpeg)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Twitter card</strong><div class="msg">twitter:card = summary_large_image</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>LinkedIn preview</strong><div class="msg">LinkedIn-ready (uses OG tags)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Structured data</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema present</strong><div class="msg">JSON-LD schema found: Organization, WebSite</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema valid</strong><div class="msg">All 2 JSON-LD blocks parse cleanly</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Performance + trust</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Page weight</strong><div class="msg">Homepage HTML: 25 KB</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Mobile viewport</strong><div class="msg">Mobile viewport set</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Favicon</strong><div class="msg">1 icon link(s), apple-touch-icon (consider adding manifest + theme-color for fuller PWA support)</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Security headers</strong><div class="msg">Has: HSTS. Missing: X-Content-Type-Options, Referrer-Policy</div><div class="fix">Add missing headers via Cloudflare Transform Rules or origin server.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Other</h3>
+                <table>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>21_apex_www_redirect</strong><div class="msg">Both apex and www serve content — split brain</div><div class="fix">Pick one as canonical and 301 the other to it. Otherwise Google may split SEO signal.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>22_http_https_redirect</strong><div class="msg">http:// → https://adiso.co.nz:443/</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>23_html_lang</strong><div class="msg">lang=&quot;en&quot;</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>24_meta_robots</strong><div class="msg">robots: index, follow</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>25_email_dns</strong><div class="msg">SPF + DMARC both present (DMARC: v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:dmarc_ru…)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>26_placeholder_text</strong><div class="msg">No placeholder text detected</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>27_linkedin_insight</strong><div class="msg">GTM detected (GTM-PDF5GTMX) but no LinkedIn Insight signals in container</div><div class="fix">Add LinkedIn Insight via GTM → New Tag → Tag Type: &#39;LinkedIn Insight&#39;. Get the partner ID from LinkedIn Campaign Manager → Account Assets → Insight Tag. Skip this check if you don&#39;t run LinkedIn Ads.</div></td>
+                </tr></table>
+            </div></div>
+        </details>
+    
+        <details class="card ok" open>
+            <summary>
+                <div class="domain">
+                    <span class="name">xos.co.nz</span>
+                    <span class="score ok">89%</span>
+                </div>
+                <div class="meta">
+                    <span class="pill pass">24 pass</span>
+                    <span class="pill warn">3 warn</span>
+                    <span class="pill fail">0 fail</span>
+                    
+                </div>
+            </summary>
+            <div class="body">
+            <div class="section">
+                <h3>Discoverability</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>HTTPS + SSL cert</strong><div class="msg">HTTPS works. Cert expires in 84 days (Aug  1 21:43:21 2026 GMT)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>robots.txt</strong><div class="msg">robots.txt found (69 bytes)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>sitemap.xml</strong><div class="msg">Sitemap at https://xos.co.nz/sitemap-index.xml (referenced in robots.txt)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Canonical URL</strong><div class="msg">Canonical: https://xos.co.nz/</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Custom 404 page</strong><div class="msg">404 status but page is minimal</div><div class="fix">Design a branded 404 with navigation back to key pages.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>On-page SEO</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Title tag</strong><div class="msg">Title (53 chars): xOS — The AI-native sales enablement operating system</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Meta description</strong><div class="msg">(153 chars): One connected platform that unifies CRM, coaching, knowledge, industry workflows, and market intelligence — so sales teams stop losing deals in the gaps.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Single H1</strong><div class="msg">One H1: AI-native sales enablement system</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Heading hierarchy</strong><div class="msg">11 headings, hierarchy clean</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Image alt text</strong><div class="msg">All 1 images have alt attributes (0 marked decorative)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Social sharing</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>OpenGraph tags</strong><div class="msg">All 4 core OG tags present</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>og:image loads</strong><div class="msg">og:image loads (image/png)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Twitter card</strong><div class="msg">twitter:card = summary_large_image</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>LinkedIn preview</strong><div class="msg">LinkedIn-ready (uses OG tags)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Structured data</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema present</strong><div class="msg">JSON-LD schema found: Organization, SoftwareApplication</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema valid</strong><div class="msg">All 2 JSON-LD blocks parse cleanly</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Performance + trust</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Page weight</strong><div class="msg">Homepage HTML: 11 KB</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Mobile viewport</strong><div class="msg">Mobile viewport set</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Favicon</strong><div class="msg">2 icon link(s), apple-touch-icon, theme-color #204557</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Security headers</strong><div class="msg">All 3 core security headers set</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Other</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>21_apex_www_redirect</strong><div class="msg">www → apex (301 redirect). Live URL: xos.co.nz</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>22_http_https_redirect</strong><div class="msg">http:// → https://xos.co.nz/</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>23_html_lang</strong><div class="msg">lang=&quot;en-NZ&quot;</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>24_meta_robots</strong><div class="msg">robots: index, follow</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>25_email_dns</strong><div class="msg">DMARC present but no SPF record</div><div class="fix">Add SPF by creating a TXT record on the apex domain like: v=spf1 include:_spf.google.com ~all (include your email provider)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>26_placeholder_text</strong><div class="msg">No placeholder text detected</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>27_linkedin_insight</strong><div class="msg">GTM detected (GTM-T4QHJS95) but no LinkedIn Insight signals in container</div><div class="fix">Add LinkedIn Insight via GTM → New Tag → Tag Type: &#39;LinkedIn Insight&#39;. Get the partner ID from LinkedIn Campaign Manager → Account Assets → Insight Tag. Skip this check if you don&#39;t run LinkedIn Ads.</div></td>
+                </tr></table>
+            </div></div>
+        </details>
+    
+        <details class="card bad" open>
+            <summary>
+                <div class="domain">
+                    <span class="name">buildfoundry.co.nz</span>
+                    <span class="score bad">42%</span>
+                </div>
+                <div class="meta">
+                    <span class="pill pass">11 pass</span>
+                    <span class="pill warn">9 warn</span>
+                    <span class="pill fail">6 fail</span>
+                    <span class="pill skip">1 skip</span>
+                </div>
+            </summary>
+            <div class="body">
+            <div class="section">
+                <h3>Discoverability</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>HTTPS + SSL cert</strong><div class="msg">HTTPS works. Cert expires in 59 days (Jul  8 00:53:13 2026 GMT)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>robots.txt</strong><div class="msg">robots.txt found (1096 bytes)</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>sitemap.xml</strong><div class="msg">Sitemap at https://buildfoundry.co.nz/sitemap.xml but not referenced in robots.txt</div><div class="fix">Add &#39;Sitemap: https://buildfoundry.co.nz/sitemap.xml&#39; to robots.txt.</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Canonical URL</strong><div class="msg">No canonical link tag</div><div class="fix">Add &lt;link rel=&#39;canonical&#39; href=&#39;https://buildfoundry.co.nz/&#39;&gt; to prevent duplicate-content issues.</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>Custom 404 page</strong><div class="msg">Missing pages return HTTP 200 (soft 404)</div><div class="fix">Configure server/framework to return proper 404 status codes.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>On-page SEO</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Title tag</strong><div class="msg">Title (51 chars): BuildFoundry | Build faster with AI-powered insight</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>Meta description</strong><div class="msg">No meta description</div><div class="fix">Add &lt;meta name=&#39;description&#39; content=&#39;...&#39;&gt; with a 120-160 char summary.</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>Single H1</strong><div class="msg">No H1 tag</div><div class="fix">Add a single H1 with your primary page topic.</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Heading hierarchy</strong><div class="msg">No headings on page</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Image alt text</strong><div class="msg">No images on homepage</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Social sharing</h3>
+                <table>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>OpenGraph tags</strong><div class="msg">Missing OG tags: og:image, og:url</div><div class="fix">Add OpenGraph tags so links shared on LinkedIn/FB/Slack render with image and copy.</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>og:image loads</strong><div class="msg">No og:image</div><div class="fix">Add og:image with a 1200x630 PNG/JPG.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Twitter card</strong><div class="msg">twitter:card = summary_large_image</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>LinkedIn preview</strong><div class="msg">LinkedIn preview will be incomplete</div><div class="fix">LinkedIn uses og:title, og:description, og:image — set all three.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Structured data</h3>
+                <table>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Schema present</strong><div class="msg">No JSON-LD structured data</div><div class="fix">Add Organization or WebSite schema for richer search results.</div></td>
+                </tr>
+                <tr class="row skip">
+                    <td class="dot"><span class="status skip">skip</span></td>
+                    <td><strong>Schema valid</strong><div class="msg">No schema to validate</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Performance + trust</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Page weight</strong><div class="msg">Homepage HTML: 1 KB</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Mobile viewport</strong><div class="msg">Mobile viewport set</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Favicon</strong><div class="msg">1 icon link(s) — no apple-touch-icon</div><div class="fix">Add &lt;link rel=&#39;apple-touch-icon&#39; href=&#39;/apple-touch-icon.png&#39;&gt; (180×180 PNG) for iOS home screen.</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Security headers</strong><div class="msg">Has: HSTS. Missing: X-Content-Type-Options, Referrer-Policy</div><div class="fix">Add missing headers via Cloudflare Transform Rules or origin server.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Other</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>21_apex_www_redirect</strong><div class="msg">www → apex (301 redirect). Live URL: buildfoundry.co.nz</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>22_http_https_redirect</strong><div class="msg">http:// → https://buildfoundry.co.nz:443/</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>23_html_lang</strong><div class="msg">lang=&quot;en&quot;</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>24_meta_robots</strong><div class="msg">No restrictive robots directive (default = index, follow)</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>25_email_dns</strong><div class="msg">SPF present but no DMARC record</div><div class="fix">Add DMARC by creating a TXT record at _dmarc.{domain} with at minimum: v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>26_placeholder_text</strong><div class="msg">No placeholder text detected</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>27_linkedin_insight</strong><div class="msg">LinkedIn Insight Tag not detected (no GTM either)</div><div class="fix">For B2B sites: install via GTM (recommended) — Tag Type: &#39;LinkedIn Insight&#39;. Get the partner ID from LinkedIn Campaign Manager → Account Assets → Insight Tag.</div></td>
+                </tr></table>
+            </div></div>
+        </details>
+    
+        <details class="card ok" open>
+            <summary>
+                <div class="domain">
+                    <span class="name">workable.co.nz</span>
+                    <span class="score ok">93%</span>
+                </div>
+                <div class="meta">
+                    <span class="pill pass">25 pass</span>
+                    <span class="pill warn">1 warn</span>
+                    <span class="pill fail">1 fail</span>
+                    
+                </div>
+            </summary>
+            <div class="body">
+            <div class="section">
+                <h3>Discoverability</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>HTTPS + SSL cert</strong><div class="msg">HTTPS works. Cert expires in 79 days (Jul 27 20:42:56 2026 GMT)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>robots.txt</strong><div class="msg">robots.txt found (1834 bytes)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>sitemap.xml</strong><div class="msg">Sitemap at https://workable.co.nz/sitemap-index.xml (referenced in robots.txt)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Canonical URL</strong><div class="msg">Canonical: https://workable.co.nz/</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Custom 404 page</strong><div class="msg">404 status but page is minimal</div><div class="fix">Design a branded 404 with navigation back to key pages.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>On-page SEO</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Title tag</strong><div class="msg">Title (38 chars): Workable | Conversational AI Reporting</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Meta description</strong><div class="msg">(140 chars): Conversational AI that turns frontline voice into structured, actionable data. Safety, field ops, inspections — without the app or the form.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Single H1</strong><div class="msg">One H1: Your biggest data source  has always been your frontline,  you just couldn’t hea</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Heading hierarchy</strong><div class="msg">31 headings, hierarchy clean</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Image alt text</strong><div class="msg">All 52 images have alt attributes (26 marked decorative)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Social sharing</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>OpenGraph tags</strong><div class="msg">All 4 core OG tags present</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>og:image loads</strong><div class="msg">og:image loads (image/png)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Twitter card</strong><div class="msg">twitter:card = summary_large_image</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>LinkedIn preview</strong><div class="msg">LinkedIn-ready (uses OG tags)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Structured data</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema present</strong><div class="msg">JSON-LD schema found: FAQPage, Organization, SoftwareApplication</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema valid</strong><div class="msg">All 3 JSON-LD blocks parse cleanly</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Performance + trust</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Page weight</strong><div class="msg">Homepage HTML: 104 KB</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Mobile viewport</strong><div class="msg">Mobile viewport set</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Favicon</strong><div class="msg">2 icon link(s), apple-touch-icon, theme-color #0A0A0B</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Security headers</strong><div class="msg">All 3 core security headers set</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Other</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>21_apex_www_redirect</strong><div class="msg">www → apex (301 redirect). Live URL: workable.co.nz</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>22_http_https_redirect</strong><div class="msg">http:// serves content directly (no redirect to https)</div><div class="fix">Force HTTPS at your CDN. Cloudflare: SSL/TLS → Edge Certificates → toggle &#39;Always Use HTTPS&#39;.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>23_html_lang</strong><div class="msg">lang=&quot;en-NZ&quot;</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>24_meta_robots</strong><div class="msg">No restrictive robots directive (default = index, follow)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>25_email_dns</strong><div class="msg">SPF + DMARC both present (DMARC: v=DMARC1; p=quarantine; adkim=r; aspf=r)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>26_placeholder_text</strong><div class="msg">No placeholder text detected</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>27_linkedin_insight</strong><div class="msg">LinkedIn Insight Tag detected inside GTM container (GTM-NNL444SK). Signals: snap.licdn.com reference</div></td>
+                </tr></table>
+            </div></div>
+        </details>
+    
+        <details class="card ok" open>
+            <summary>
+                <div class="domain">
+                    <span class="name">takeoffqs.com</span>
+                    <span class="score ok">100%</span>
+                </div>
+                <div class="meta">
+                    <span class="pill pass">27 pass</span>
+                    <span class="pill warn">0 warn</span>
+                    <span class="pill fail">0 fail</span>
+                    
+                </div>
+            </summary>
+            <div class="body">
+            <div class="section">
+                <h3>Discoverability</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>HTTPS + SSL cert</strong><div class="msg">HTTPS works. Cert expires in 74 days (Jul 22 23:31:38 2026 GMT)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>robots.txt</strong><div class="msg">robots.txt found (73 bytes)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>sitemap.xml</strong><div class="msg">Sitemap at https://takeoffqs.com/sitemap-index.xml (referenced in robots.txt)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Canonical URL</strong><div class="msg">Canonical: https://takeoffqs.com/</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Custom 404 page</strong><div class="msg">Branded 404 verified manually — has navigation, popular pages, branded CTAs</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>On-page SEO</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Title tag</strong><div class="msg">Title (58 chars): TakeoffQS — Faster takeoffs. Faster quotes. More jobs won.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Meta description</strong><div class="msg">(133 chars): AI-powered takeoffs from residential PDF plans, trained on NZ drawings. Built for builders, quantity surveyors, suppliers and trades.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Single H1</strong><div class="msg">One H1: Faster takeoffs. Faster quotes. More jobs won.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Heading hierarchy</strong><div class="msg">29 headings, hierarchy clean</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Image alt text</strong><div class="msg">All 27 images have alt attributes (0 marked decorative)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Social sharing</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>OpenGraph tags</strong><div class="msg">All 4 core OG tags present</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>og:image loads</strong><div class="msg">og:image loads (image/png)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Twitter card</strong><div class="msg">twitter:card = summary_large_image</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>LinkedIn preview</strong><div class="msg">LinkedIn-ready (uses OG tags)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Structured data</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema present</strong><div class="msg">JSON-LD schema found: ?</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema valid</strong><div class="msg">All 1 JSON-LD blocks parse cleanly</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Performance + trust</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Page weight</strong><div class="msg">Homepage HTML: 116 KB</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Mobile viewport</strong><div class="msg">Mobile viewport set</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Favicon</strong><div class="msg">1 icon link(s), apple-touch-icon, theme-color #0970F1</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Security headers</strong><div class="msg">All 3 core security headers set</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Other</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>21_apex_www_redirect</strong><div class="msg">www → apex (301 redirect). Live URL: takeoffqs.com</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>22_http_https_redirect</strong><div class="msg">http:// → https://takeoffqs.com/</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>23_html_lang</strong><div class="msg">lang=&quot;en&quot;</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>24_meta_robots</strong><div class="msg">No restrictive robots directive (default = index, follow)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>25_email_dns</strong><div class="msg">SPF + DMARC both present (DMARC: v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:dmarc_ru…)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>26_placeholder_text</strong><div class="msg">No placeholder text detected</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>27_linkedin_insight</strong><div class="msg">LinkedIn Insight Tag detected inside GTM container (GTM-5XHG4LVT). Signals: snap.licdn.com reference</div></td>
+                </tr></table>
+            </div></div>
+        </details>
+    
+        <details class="card warn" open>
+            <summary>
+                <div class="domain">
+                    <span class="name">trafficsense.co.nz</span>
+                    <span class="score warn">54%</span>
+                </div>
+                <div class="meta">
+                    <span class="pill pass">14 pass</span>
+                    <span class="pill warn">9 warn</span>
+                    <span class="pill fail">3 fail</span>
+                    <span class="pill skip">1 skip</span>
+                </div>
+            </summary>
+            <div class="body">
+            <div class="section">
+                <h3>Discoverability</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>HTTPS + SSL cert</strong><div class="msg">HTTPS works. Cert expires in 85 days (Aug  3 04:08:02 2026 GMT)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>robots.txt</strong><div class="msg">robots.txt found (78 bytes)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>sitemap.xml</strong><div class="msg">Sitemap at https://trafficsense.co.nz/sitemap-index.xml (referenced in robots.txt)</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Canonical URL</strong><div class="msg">Canonical points elsewhere: https://www.trafficsense.co.nz/</div><div class="fix">Confirm this is intentional — usually canonical should match the live URL.</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Custom 404 page</strong><div class="msg">404 status but page is minimal</div><div class="fix">Design a branded 404 with navigation back to key pages.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>On-page SEO</h3>
+                <table>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Title tag</strong><div class="msg">Title short (26 chars): TrafficSense — Coming soon</div><div class="fix">Aim for 30-60 chars including brand name.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Meta description</strong><div class="msg">(120 chars): TrafficSense is an AI-powered Traffic Management Plan authoring platform, built for the realities of traffic management.</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>Single H1</strong><div class="msg">No H1 tag</div><div class="fix">Add a single H1 with your primary page topic.</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Heading hierarchy</strong><div class="msg">No headings on page</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Image alt text</strong><div class="msg">All 1 images have alt attributes (0 marked decorative)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Social sharing</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>OpenGraph tags</strong><div class="msg">All 4 core OG tags present</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>og:image loads</strong><div class="msg">og:image loads (image/png)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Twitter card</strong><div class="msg">twitter:card = summary_large_image</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>LinkedIn preview</strong><div class="msg">LinkedIn-ready (uses OG tags)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Structured data</h3>
+                <table>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Schema present</strong><div class="msg">No JSON-LD structured data</div><div class="fix">Add Organization or WebSite schema for richer search results.</div></td>
+                </tr>
+                <tr class="row skip">
+                    <td class="dot"><span class="status skip">skip</span></td>
+                    <td><strong>Schema valid</strong><div class="msg">No schema to validate</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Performance + trust</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Page weight</strong><div class="msg">Homepage HTML: 11 KB</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Mobile viewport</strong><div class="msg">Mobile viewport set</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Favicon</strong><div class="msg">1 icon link(s) — no apple-touch-icon</div><div class="fix">Add &lt;link rel=&#39;apple-touch-icon&#39; href=&#39;/apple-touch-icon.png&#39;&gt; (180×180 PNG) for iOS home screen.</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>Security headers</strong><div class="msg">Missing: HSTS, X-Content-Type-Options, Referrer-Policy</div><div class="fix">Add HSTS, X-Content-Type-Options: nosniff, Referrer-Policy via Cloudflare or origin.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Other</h3>
+                <table>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>21_apex_www_redirect</strong><div class="msg">Both apex and www serve content — split brain</div><div class="fix">Pick one as canonical and 301 the other to it. Otherwise Google may split SEO signal.</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>22_http_https_redirect</strong><div class="msg">http:// serves content directly (no redirect to https)</div><div class="fix">Force HTTPS at your CDN. Cloudflare: SSL/TLS → Edge Certificates → toggle &#39;Always Use HTTPS&#39;.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>23_html_lang</strong><div class="msg">lang=&quot;en-NZ&quot;</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>24_meta_robots</strong><div class="msg">No restrictive robots directive (default = index, follow)</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>25_email_dns</strong><div class="msg">SPF present but no DMARC record</div><div class="fix">Add DMARC by creating a TXT record at _dmarc.{domain} with at minimum: v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>26_placeholder_text</strong><div class="msg">No placeholder text detected</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>27_linkedin_insight</strong><div class="msg">GTM detected (GTM-TMV4C86D) but no LinkedIn Insight signals in container</div><div class="fix">Add LinkedIn Insight via GTM → New Tag → Tag Type: &#39;LinkedIn Insight&#39;. Get the partner ID from LinkedIn Campaign Manager → Account Assets → Insight Tag. Skip this check if you don&#39;t run LinkedIn Ads.</div></td>
+                </tr></table>
+            </div></div>
+        </details>
+    
+        <details class="card warn" open>
+            <summary>
+                <div class="domain">
+                    <span class="name">trafficsense.com.au</span>
+                    <span class="score warn">62%</span>
+                </div>
+                <div class="meta">
+                    <span class="pill pass">16 pass</span>
+                    <span class="pill warn">7 warn</span>
+                    <span class="pill fail">3 fail</span>
+                    <span class="pill skip">1 skip</span>
+                </div>
+            </summary>
+            <div class="body">
+            <div class="section">
+                <h3>Discoverability</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>HTTPS + SSL cert</strong><div class="msg">HTTPS works. Cert expires in 83 days (Jul 31 20:31:12 2026 GMT)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>robots.txt</strong><div class="msg">robots.txt found (78 bytes)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>sitemap.xml</strong><div class="msg">Sitemap at https://trafficsense.co.nz/sitemap-index.xml (referenced in robots.txt)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Canonical URL</strong><div class="msg">Canonical: https://trafficsense.com.au/</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Custom 404 page</strong><div class="msg">404 status but page is minimal</div><div class="fix">Design a branded 404 with navigation back to key pages.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>On-page SEO</h3>
+                <table>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Title tag</strong><div class="msg">Title short (26 chars): TrafficSense — Coming soon</div><div class="fix">Aim for 30-60 chars including brand name.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Meta description</strong><div class="msg">(120 chars): TrafficSense is an AI-powered Traffic Management Plan authoring platform, built for the realities of traffic management.</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>Single H1</strong><div class="msg">No H1 tag</div><div class="fix">Add a single H1 with your primary page topic.</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Heading hierarchy</strong><div class="msg">No headings on page</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Image alt text</strong><div class="msg">All 1 images have alt attributes (0 marked decorative)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Social sharing</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>OpenGraph tags</strong><div class="msg">All 4 core OG tags present</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>og:image loads</strong><div class="msg">og:image loads (image/png)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Twitter card</strong><div class="msg">twitter:card = summary_large_image</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>LinkedIn preview</strong><div class="msg">LinkedIn-ready (uses OG tags)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Structured data</h3>
+                <table>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Schema present</strong><div class="msg">No JSON-LD structured data</div><div class="fix">Add Organization or WebSite schema for richer search results.</div></td>
+                </tr>
+                <tr class="row skip">
+                    <td class="dot"><span class="status skip">skip</span></td>
+                    <td><strong>Schema valid</strong><div class="msg">No schema to validate</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Performance + trust</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Page weight</strong><div class="msg">Homepage HTML: 10 KB</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Mobile viewport</strong><div class="msg">Mobile viewport set</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Favicon</strong><div class="msg">1 icon link(s) — no apple-touch-icon</div><div class="fix">Add &lt;link rel=&#39;apple-touch-icon&#39; href=&#39;/apple-touch-icon.png&#39;&gt; (180×180 PNG) for iOS home screen.</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>Security headers</strong><div class="msg">Missing: HSTS, X-Content-Type-Options, Referrer-Policy</div><div class="fix">Add HSTS, X-Content-Type-Options: nosniff, Referrer-Policy via Cloudflare or origin.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Other</h3>
+                <table>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>21_apex_www_redirect</strong><div class="msg">Both apex and www serve content — split brain</div><div class="fix">Pick one as canonical and 301 the other to it. Otherwise Google may split SEO signal.</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>22_http_https_redirect</strong><div class="msg">http:// serves content directly (no redirect to https)</div><div class="fix">Force HTTPS at your CDN. Cloudflare: SSL/TLS → Edge Certificates → toggle &#39;Always Use HTTPS&#39;.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>23_html_lang</strong><div class="msg">lang=&quot;en-AU&quot;</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>24_meta_robots</strong><div class="msg">No restrictive robots directive (default = index, follow)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>25_email_dns</strong><div class="msg">SPF + DMARC both present (DMARC: v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:dmarc_ru…)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>26_placeholder_text</strong><div class="msg">No placeholder text detected</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>27_linkedin_insight</strong><div class="msg">GTM detected (GTM-TMV4C86D) but no LinkedIn Insight signals in container</div><div class="fix">Add LinkedIn Insight via GTM → New Tag → Tag Type: &#39;LinkedIn Insight&#39;. Get the partner ID from LinkedIn Campaign Manager → Account Assets → Insight Tag. Skip this check if you don&#39;t run LinkedIn Ads.</div></td>
+                </tr></table>
+            </div></div>
+        </details>
+    
+        <details class="card warn" open>
+            <summary>
+                <div class="domain">
+                    <span class="name">camba.ai</span>
+                    <span class="score warn">77%</span>
+                </div>
+                <div class="meta">
+                    <span class="pill pass">20 pass</span>
+                    <span class="pill warn">5 warn</span>
+                    <span class="pill fail">1 fail</span>
+                    <span class="pill skip">1 skip</span>
+                </div>
+            </summary>
+            <div class="body">
+            <div class="section">
+                <h3>Discoverability</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>HTTPS + SSL cert</strong><div class="msg">HTTPS works. Cert expires in 86 days (Aug  3 20:57:41 2026 GMT)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>robots.txt</strong><div class="msg">robots.txt found (333 bytes)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>sitemap.xml</strong><div class="msg">Sitemap at https://camba.ai/sitemap-index.xml (referenced in robots.txt)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Canonical URL</strong><div class="msg">Canonical: https://camba.ai/</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Custom 404 page</strong><div class="msg">404 status but page is minimal</div><div class="fix">Design a branded 404 with navigation back to key pages.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>On-page SEO</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Title tag</strong><div class="msg">Title (57 chars): Camba — AI-first CRM for NZ vehicle dealers (coming soon)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Meta description</strong><div class="msg">(152 chars): Camba is an AI-first CRM built for New Zealand vehicle dealerships. Less admin, more time selling. Sign up and we&#39;ll let you know the moment we go live.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Single H1</strong><div class="msg">One H1: AI-first CRM for NZ vehicle dealers.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Heading hierarchy</strong><div class="msg">1 headings, hierarchy clean</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Image alt text</strong><div class="msg">All 1 images have alt attributes (0 marked decorative)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Social sharing</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>OpenGraph tags</strong><div class="msg">All 4 core OG tags present</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>og:image loads</strong><div class="msg">og:image loads (image/png)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Twitter card</strong><div class="msg">twitter:card = summary_large_image</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>LinkedIn preview</strong><div class="msg">LinkedIn-ready (uses OG tags)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Structured data</h3>
+                <table>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Schema present</strong><div class="msg">No JSON-LD structured data</div><div class="fix">Add Organization or WebSite schema for richer search results.</div></td>
+                </tr>
+                <tr class="row skip">
+                    <td class="dot"><span class="status skip">skip</span></td>
+                    <td><strong>Schema valid</strong><div class="msg">No schema to validate</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Performance + trust</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Page weight</strong><div class="msg">Homepage HTML: 7 KB</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Mobile viewport</strong><div class="msg">Mobile viewport set</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>Favicon</strong><div class="msg">1 icon link(s) — no apple-touch-icon</div><div class="fix">Add &lt;link rel=&#39;apple-touch-icon&#39; href=&#39;/apple-touch-icon.png&#39;&gt; (180×180 PNG) for iOS home screen.</div></td>
+                </tr>
+                <tr class="row fail">
+                    <td class="dot"><span class="status fail">fail</span></td>
+                    <td><strong>Security headers</strong><div class="msg">Missing: HSTS, X-Content-Type-Options, Referrer-Policy</div><div class="fix">Add HSTS, X-Content-Type-Options: nosniff, Referrer-Policy via Cloudflare or origin.</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Other</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>21_apex_www_redirect</strong><div class="msg">www → apex (301 redirect). Live URL: camba.ai</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>22_http_https_redirect</strong><div class="msg">http:// → https://camba.ai/</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>23_html_lang</strong><div class="msg">lang=&quot;en&quot;</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>24_meta_robots</strong><div class="msg">No restrictive robots directive (default = index, follow)</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>25_email_dns</strong><div class="msg">DMARC present but no SPF record</div><div class="fix">Add SPF by creating a TXT record on the apex domain like: v=spf1 include:_spf.google.com ~all (include your email provider)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>26_placeholder_text</strong><div class="msg">No placeholder text detected</div></td>
+                </tr>
+                <tr class="row warn">
+                    <td class="dot"><span class="status warn">warn</span></td>
+                    <td><strong>27_linkedin_insight</strong><div class="msg">GTM detected (GTM-PD95VKSF) but no LinkedIn Insight signals in container</div><div class="fix">Add LinkedIn Insight via GTM → New Tag → Tag Type: &#39;LinkedIn Insight&#39;. Get the partner ID from LinkedIn Campaign Manager → Account Assets → Insight Tag. Skip this check if you don&#39;t run LinkedIn Ads.</div></td>
+                </tr></table>
+            </div></div>
+        </details>
+    
+        <details class="card ok" open>
+            <summary>
+                <div class="domain">
+                    <span class="name">thatch.cloud</span>
+                    <span class="score ok">100%</span>
+                </div>
+                <div class="meta">
+                    <span class="pill pass">27 pass</span>
+                    <span class="pill warn">0 warn</span>
+                    <span class="pill fail">0 fail</span>
+                    
+                </div>
+            </summary>
+            <div class="body">
+            <div class="section">
+                <h3>Discoverability</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>HTTPS + SSL cert</strong><div class="msg">HTTPS works. Cert expires in 88 days (Aug  5 20:53:50 2026 GMT)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>robots.txt</strong><div class="msg">robots.txt found (1810 bytes)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>sitemap.xml</strong><div class="msg">Sitemap at https://thatch.cloud/sitemap-index.xml (referenced in robots.txt)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Canonical URL</strong><div class="msg">Canonical: https://thatch.cloud/</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Custom 404 page</strong><div class="msg">Branded 404 verified manually</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>On-page SEO</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Title tag</strong><div class="msg">Title (58 chars): Thatch — Sovereign AI compute, distributed across Aotearoa</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Meta description</strong><div class="msg">(158 chars): Thatch is a distributed AI inference cloud — heat-pump-sized compute units running AI workloads from many sites across New Zealand, not one large data centre.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Single H1</strong><div class="msg">One H1: Sovereign AI compute, distributed across Aotearoa.</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Heading hierarchy</strong><div class="msg">28 headings, hierarchy clean</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Image alt text</strong><div class="msg">All 12 images have alt attributes (11 marked decorative)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Social sharing</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>OpenGraph tags</strong><div class="msg">All 4 core OG tags present</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>og:image loads</strong><div class="msg">og:image loads (image/png)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Twitter card</strong><div class="msg">twitter:card = summary_large_image</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>LinkedIn preview</strong><div class="msg">LinkedIn-ready (uses OG tags)</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Structured data</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema present</strong><div class="msg">JSON-LD schema found: FAQPage, Organization, WebSite</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Schema valid</strong><div class="msg">All 3 JSON-LD blocks parse cleanly</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Performance + trust</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Page weight</strong><div class="msg">Homepage HTML: 35 KB</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Mobile viewport</strong><div class="msg">Mobile viewport set</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Favicon</strong><div class="msg">3 icon link(s), apple-touch-icon, web manifest, theme-color #0a0c0d</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>Security headers</strong><div class="msg">All 3 core security headers set</div></td>
+                </tr></table>
+            </div>
+            <div class="section">
+                <h3>Other</h3>
+                <table>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>21_apex_www_redirect</strong><div class="msg">www → apex (301 redirect). Live URL: thatch.cloud</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>22_http_https_redirect</strong><div class="msg">http:// → https://thatch.cloud/</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>23_html_lang</strong><div class="msg">lang=&quot;en-NZ&quot;</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>24_meta_robots</strong><div class="msg">No restrictive robots directive (default = index, follow)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>25_email_dns</strong><div class="msg">SPF + DMARC both present (DMARC: v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:dmarc_ru…)</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>26_placeholder_text</strong><div class="msg">No placeholder text detected</div></td>
+                </tr>
+                <tr class="row pass">
+                    <td class="dot"><span class="status pass">pass</span></td>
+                    <td><strong>27_linkedin_insight</strong><div class="msg">LinkedIn Insight Tag detected inside GTM container (GTM-NPPLMD78). Signals: snap.licdn.com reference</div></td>
+                </tr></table>
+            </div></div>
+        </details>
+    </div>
+    <footer>20 checks per domain. Re-run weekly with <code>python3 marketing-audit.py</code>.</footer>
+</div>
+</body>
+</html>
