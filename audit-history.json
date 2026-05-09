@@ -1,0 +1,346 @@
+{
+  "domains": {
+    "agenticintelligence.co.nz": [
+      {
+        "date": "2026-05-04",
+        "percent": 80,
+        "pass": 16,
+        "warn": 3,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-05",
+        "percent": 92,
+        "pass": 22,
+        "warn": 1,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-06",
+        "percent": 89,
+        "pass": 24,
+        "warn": 2,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-07",
+        "percent": 89,
+        "pass": 24,
+        "warn": 2,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-08",
+        "percent": 89,
+        "pass": 24,
+        "warn": 2,
+        "fail": 1
+      }
+    ],
+    "adiso.co.nz": [
+      {
+        "date": "2026-05-04",
+        "percent": 85,
+        "pass": 17,
+        "warn": 3,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-05",
+        "percent": 88,
+        "pass": 21,
+        "warn": 3,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-06",
+        "percent": 85,
+        "pass": 23,
+        "warn": 4,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-07",
+        "percent": 85,
+        "pass": 23,
+        "warn": 4,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-08",
+        "percent": 85,
+        "pass": 23,
+        "warn": 4,
+        "fail": 0
+      }
+    ],
+    "xos.co.nz": [
+      {
+        "date": "2026-05-04",
+        "percent": 85,
+        "pass": 17,
+        "warn": 2,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-05",
+        "percent": 96,
+        "pass": 23,
+        "warn": 1,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-06",
+        "percent": 89,
+        "pass": 24,
+        "warn": 3,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-07",
+        "percent": 89,
+        "pass": 24,
+        "warn": 3,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-08",
+        "percent": 89,
+        "pass": 24,
+        "warn": 3,
+        "fail": 0
+      }
+    ],
+    "buildfoundry.co.nz": [
+      {
+        "date": "2026-05-04",
+        "percent": 37,
+        "pass": 7,
+        "warn": 6,
+        "fail": 6
+      },
+      {
+        "date": "2026-05-05",
+        "percent": 43,
+        "pass": 10,
+        "warn": 7,
+        "fail": 6
+      },
+      {
+        "date": "2026-05-06",
+        "percent": 42,
+        "pass": 11,
+        "warn": 9,
+        "fail": 6
+      },
+      {
+        "date": "2026-05-07",
+        "percent": 42,
+        "pass": 11,
+        "warn": 9,
+        "fail": 6
+      },
+      {
+        "date": "2026-05-08",
+        "percent": 42,
+        "pass": 11,
+        "warn": 9,
+        "fail": 6
+      }
+    ],
+    "workable.co.nz": [
+      {
+        "date": "2026-05-04",
+        "percent": 95,
+        "pass": 19,
+        "warn": 1,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-05",
+        "percent": 92,
+        "pass": 22,
+        "warn": 1,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-06",
+        "percent": 93,
+        "pass": 25,
+        "warn": 1,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-07",
+        "percent": 93,
+        "pass": 25,
+        "warn": 1,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-08",
+        "percent": 93,
+        "pass": 25,
+        "warn": 1,
+        "fail": 1
+      }
+    ],
+    "takeoffqs.com": [
+      {
+        "date": "2026-05-04",
+        "percent": 75,
+        "pass": 15,
+        "warn": 4,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-05",
+        "percent": 96,
+        "pass": 23,
+        "warn": 1,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-06",
+        "percent": 100,
+        "pass": 27,
+        "warn": 0,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-07",
+        "percent": 100,
+        "pass": 27,
+        "warn": 0,
+        "fail": 0
+      },
+      {
+        "date": "2026-05-08",
+        "percent": 100,
+        "pass": 27,
+        "warn": 0,
+        "fail": 0
+      }
+    ],
+    "trafficsense.co.nz": [
+      {
+        "date": "2026-05-04",
+        "percent": 26,
+        "pass": 5,
+        "warn": 7,
+        "fail": 7
+      },
+      {
+        "date": "2026-05-05",
+        "percent": 57,
+        "pass": 13,
+        "warn": 7,
+        "fail": 3
+      },
+      {
+        "date": "2026-05-06",
+        "percent": 54,
+        "pass": 14,
+        "warn": 9,
+        "fail": 3
+      },
+      {
+        "date": "2026-05-07",
+        "percent": 54,
+        "pass": 14,
+        "warn": 9,
+        "fail": 3
+      },
+      {
+        "date": "2026-05-08",
+        "percent": 54,
+        "pass": 14,
+        "warn": 9,
+        "fail": 3
+      }
+    ],
+    "trafficsense.com.au": [
+      {
+        "date": "2026-05-04",
+        "percent": 79,
+        "pass": 15,
+        "warn": 3,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-05",
+        "percent": 61,
+        "pass": 14,
+        "warn": 6,
+        "fail": 3
+      },
+      {
+        "date": "2026-05-06",
+        "percent": 62,
+        "pass": 16,
+        "warn": 7,
+        "fail": 3
+      },
+      {
+        "date": "2026-05-07",
+        "percent": 62,
+        "pass": 16,
+        "warn": 7,
+        "fail": 3
+      },
+      {
+        "date": "2026-05-08",
+        "percent": 62,
+        "pass": 16,
+        "warn": 7,
+        "fail": 3
+      }
+    ],
+    "camba.ai": [
+      {
+        "date": "2026-05-05",
+        "percent": 83,
+        "pass": 19,
+        "warn": 3,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-06",
+        "percent": 77,
+        "pass": 20,
+        "warn": 5,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-07",
+        "percent": 77,
+        "pass": 20,
+        "warn": 5,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-08",
+        "percent": 77,
+        "pass": 20,
+        "warn": 5,
+        "fail": 1
+      }
+    ],
+    "thatch.cloud": [
+      {
+        "date": "2026-05-07",
+        "percent": 89,
+        "pass": 24,
+        "warn": 2,
+        "fail": 1
+      },
+      {
+        "date": "2026-05-08",
+        "percent": 100,
+        "pass": 27,
+        "warn": 0,
+        "fail": 0
+      }
+    ]
+  }
+}

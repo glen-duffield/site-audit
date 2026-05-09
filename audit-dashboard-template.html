@@ -1,0 +1,1496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Site audit dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  /* Brand */
+  --navy: #384863;
+  --grey: #EAEDF6;
+  --yellow: #FADC74;
+  /* Surfaces */
+  --bg: #1B2536;
+  --card: #2A3548;
+  --card-2: #354256;
+  --line: #2D3A52;
+  --line-strong: #4A5A78;
+  --hover: #354256;
+  /* Text */
+  --ink: #EAEDF6;
+  --ink-soft: #C5CCDC;
+  --muted: #8A93A8;
+  --muted-strong: #6E7888;
+  /* Accent (yellow) */
+  --accent: #FADC74;
+  --accent-ink: #1B2536;
+  --accent-soft: rgba(250, 220, 116, 0.15);
+  /* Status */
+  --pass: #6EE7A8;
+  --pass-bg: rgba(110, 231, 168, 0.13);
+  --warn: #FBBF24;
+  --warn-bg: rgba(251, 191, 36, 0.13);
+  --fail: #F87171;
+  --fail-bg: rgba(248, 113, 113, 0.13);
+  --skip: #8A93A8;
+  --skip-bg: rgba(138, 147, 168, 0.13);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 28px 22px 60px;
+  background: var(--bg); color: var(--ink);
+  font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.wrap { max-width: 1100px; margin: 0 auto; }
+
+.head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin-bottom: 22px; flex-wrap: wrap; }
+.head h1 { margin: 0 0 4px; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
+.head .meta { color: var(--muted); font-size: 13px; }
+.head .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.btn {
+  border: 1px solid var(--line-strong); background: transparent; color: var(--ink);
+  padding: 7px 14px; border-radius: 0; font-size: 13px; cursor: pointer;
+  font-weight: 500; transition: background .12s, border-color .12s;
+  font-family: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+}
+.btn:hover { background: var(--hover); border-color: var(--line-strong); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.btn.primary:hover { background: #FFE795; border-color: #FFE795; }
+.btn.ghost { border-color: transparent; }
+.btn.ghost:hover { background: var(--hover); }
+.btn.warn-btn { background: var(--warn-bg); border-color: var(--warn); color: var(--warn); }
+.btn.warn-btn:hover { background: rgba(251, 191, 36, 0.2); }
+.btn-back { color: var(--muted); padding: 4px 8px; font-size: 13px; }
+.btn-back:hover { color: var(--ink); background: var(--hover); }
+
+.summary {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px; margin-bottom: 22px;
+}
+.summary .stat {
+  background: var(--card); border: 1px solid var(--line); border-radius: 0;
+  padding: 12px 14px; transition: box-shadow .12s, border-color .12s;
+}
+.summary .stat.clickable { cursor: pointer; }
+.summary .stat.clickable:hover { border-color: var(--line-strong); box-shadow: var(--shadow); }
+.summary .stat .n { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.summary .stat .l { color: var(--muted); font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+.summary .stat.pass .n { color: var(--pass); }
+.summary .stat.warn .n { color: var(--warn); }
+.summary .stat.fail .n { color: var(--fail); }
+.summary .stat.clickable .l::after { content: " ›"; opacity: 0.5; }
+
+/* === Overview grid === */
+.brand-grid {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.tile {
+  background: var(--card); border: 1px solid var(--line); border-radius: 0;
+  padding: 18px 18px 16px; cursor: pointer; transition: box-shadow .15s, transform .15s, border-color .15s;
+  box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; min-height: 160px;
+  text-align: left; font-family: inherit;
+}
+.tile:hover { box-shadow: var(--shadow-hover); border-color: var(--line-strong); transform: translateY(-1px); }
+.tile-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.tile-name { font-size: 15.5px; font-weight: 600; letter-spacing: -0.005em; }
+.tile-tagline { color: var(--muted); font-size: 12.5px; margin-top: 2px; line-height: 1.35; }
+.tile-score {
+  font-size: 22px; font-weight: 700; padding: 4px 11px; border-radius: 0;
+  font-variant-numeric: tabular-nums; flex-shrink: 0;
+}
+.tile-score.ok { background: var(--pass-bg); color: var(--pass); }
+.tile-score.warn { background: var(--warn-bg); color: var(--warn); }
+.tile-score.bad { background: var(--fail-bg); color: var(--fail); }
+.tile-score.none { background: var(--skip-bg); color: var(--skip); }
+.tile-bar { height: 6px; border-radius: 0; overflow: hidden; display: flex; background: var(--skip-bg); }
+.tile-bar .seg { height: 100%; }
+.tile-bar .seg.pass { background: var(--pass); }
+.tile-bar .seg.warn { background: var(--warn); }
+.tile-bar .seg.fail { background: var(--fail); }
+.tile-foot { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 12.5px; margin-top: auto; }
+.tile-counts { display: flex; gap: 8px; font-variant-numeric: tabular-nums; }
+.tile-counts .c-pass { color: var(--pass); }
+.tile-counts .c-warn { color: var(--warn); }
+.tile-counts .c-fail { color: var(--fail); }
+.tile-domains-count { color: var(--muted); }
+.tile-domains { display: flex; flex-direction: column; gap: 4px; }
+.tile-domain {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  font-size: 12px; padding: 3px 0;
+}
+.tile-domain-url {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace; color: var(--ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+  text-decoration: none;
+}
+.tile-domain-url:hover { color: var(--accent); }
+.tile-domain-url .ext { color: var(--muted); font-size: 11px; opacity: 0.7; margin-left: 2px; }
+.tile-domain-url:hover .ext { color: var(--accent); opacity: 1; }
+.domain-head .url { text-decoration: none; }
+.domain-head a.url { color: var(--ink); }
+.domain-head a.url:hover { color: var(--accent); }
+.domain-head a.url .ext { color: var(--muted); font-size: 12px; opacity: 0.7; margin-left: 3px; }
+.domain-head a.url:hover .ext { color: var(--accent); opacity: 1; }
+.live-url {
+  font-size: 11.5px; color: var(--muted); font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  margin-top: 1px;
+}
+.live-url a { color: var(--muted); text-decoration: none; }
+.live-url a:hover { color: var(--accent); text-decoration: underline; }
+.tile-domain-pct {
+  font-weight: 600; font-variant-numeric: tabular-nums; flex-shrink: 0;
+  font-size: 11.5px; padding: 1px 6px; border-radius: 0;
+}
+.tile-domain-pct.ok { background: var(--pass-bg); color: var(--pass); }
+.tile-domain-pct.warn { background: var(--warn-bg); color: var(--warn); }
+.tile-domain-pct.bad { background: var(--fail-bg); color: var(--fail); }
+.tile-domain-pct.none { background: var(--skip-bg); color: var(--skip); }
+.tile-spark { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 11.5px; }
+.tile-spark .spark { vertical-align: middle; }
+.spark-empty { color: var(--muted); font-size: 11px; opacity: 0.7; }
+.trend-delta {
+  font-size: 11.5px; font-weight: 600; padding: 2px 7px; border-radius: 0;
+  font-variant-numeric: tabular-nums; display: inline-flex; align-items: center; gap: 3px;
+}
+.trend-delta.up { background: var(--pass-bg); color: var(--pass); }
+.trend-delta.down { background: var(--fail-bg); color: var(--fail); }
+.trend-delta.flat { background: var(--skip-bg); color: var(--skip); }
+.history-row {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 12px 20px; border-bottom: 1px solid var(--line); background: var(--hover);
+}
+.history-row .label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--muted);
+}
+.history-row .spark { vertical-align: middle; }
+.tile-local { font-size: 11px; padding: 1px 7px; background: var(--accent-soft); color: var(--accent); border: 1px dashed var(--accent); }
+
+/* === Brand detail === */
+.brand-detail-head {
+  background: var(--card); border: 1px solid var(--line); border-radius: 0;
+  padding: 22px 24px; margin-bottom: 16px; box-shadow: var(--shadow);
+}
+.brand-detail-head .top { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 6px; flex-wrap: wrap; }
+.brand-detail-head h2 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.brand-detail-head .tagline { color: var(--muted); font-size: 14px; }
+.brand-detail-head .score-row {
+  display: flex; align-items: center; gap: 14px; margin-top: 14px;
+  padding-top: 14px; border-top: 1px solid var(--line); flex-wrap: wrap;
+}
+.brand-detail-head .score-row .pct {
+  font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums;
+  padding: 4px 12px; border-radius: 0;
+}
+.brand-detail-head .score-row .pct.ok { background: var(--pass-bg); color: var(--pass); }
+.brand-detail-head .score-row .pct.warn { background: var(--warn-bg); color: var(--warn); }
+.brand-detail-head .score-row .pct.bad { background: var(--fail-bg); color: var(--fail); }
+.brand-detail-head .score-row .pct.none { background: var(--skip-bg); color: var(--skip); }
+.brand-detail-head .score-row .pills { display: flex; gap: 5px; flex-wrap: wrap; }
+
+/* === Filter chips === */
+.filter-bar {
+  display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; align-items: center;
+}
+.filter-bar .filter-label { color: var(--muted); font-size: 12.5px; margin-right: 4px; }
+.chip {
+  border: 1px solid var(--line-strong); background: transparent; color: var(--ink);
+  padding: 5px 12px; border-radius: 0; font-size: 12.5px; cursor: pointer;
+  font-family: inherit; font-weight: 500; transition: all .12s;
+  font-variant-numeric: tabular-nums;
+}
+.chip:hover { border-color: var(--accent); background: var(--hover); }
+.chip.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.chip.warn-chip { color: var(--warn); border-color: rgba(184, 109, 0, 0.3); }
+.chip.warn-chip.active { background: var(--warn); color: var(--accent-ink); border-color: var(--warn); font-weight: 600; }
+.chip.fail-chip { color: var(--fail); border-color: rgba(184, 57, 47, 0.3); }
+.chip.fail-chip.active { background: var(--fail); color: var(--accent-ink); border-color: var(--fail); font-weight: 600; }
+.chip.pass-chip { color: var(--pass); border-color: rgba(45, 122, 79, 0.3); }
+.chip.pass-chip.active { background: var(--pass); color: var(--accent-ink); border-color: var(--pass); font-weight: 600; }
+
+.domain {
+  background: var(--card); border: 1px solid var(--line); border-radius: 0;
+  margin-bottom: 14px; overflow: hidden; box-shadow: var(--shadow);
+}
+.domain-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 20px; border-bottom: 1px solid var(--line);
+}
+.domain-head .left { display: flex; align-items: center; gap: 10px; min-width: 0; flex-wrap: wrap; }
+.domain-head .url { font-size: 15px; font-weight: 500; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.domain-head .right { display: flex; align-items: center; gap: 12px; }
+.domain-head .pct { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; padding: 3px 10px; border-radius: 0; }
+.domain-head .pct.ok { background: var(--pass-bg); color: var(--pass); }
+.domain-head .pct.warn { background: var(--warn-bg); color: var(--warn); }
+.domain-head .pct.bad { background: var(--fail-bg); color: var(--fail); }
+.domain-head .pct.none { background: var(--skip-bg); color: var(--skip); }
+.domain.pending .domain-head { background: repeating-linear-gradient(45deg, transparent 0 8px, rgba(0,0,0,0.015) 8px 16px); }
+.domain.pending .url { color: var(--muted); }
+
+.pill {
+  font-size: 11.5px; padding: 2px 8px; border-radius: 0; font-weight: 500;
+  font-variant-numeric: tabular-nums; cursor: pointer; border: none; font-family: inherit;
+}
+.pill[disabled] { cursor: default; }
+.pill.pass { background: var(--pass-bg); color: var(--pass); }
+.pill.warn { background: var(--warn-bg); color: var(--warn); }
+.pill.fail { background: var(--fail-bg); color: var(--fail); }
+.pill.skip { background: var(--skip-bg); color: var(--skip); }
+.pill.none { background: var(--skip-bg); color: var(--skip); border: 1px dashed var(--line-strong); }
+.pill.local { background: var(--accent-soft); color: var(--accent); border: 1px dashed var(--accent); }
+.pill.clickable:hover:not([disabled]) { transform: translateY(-1px); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.pills { display: flex; gap: 5px; flex-wrap: wrap; }
+
+.del-btn {
+  border: none; background: none; cursor: pointer; color: var(--muted); padding: 4px 8px;
+  border-radius: 0; font-size: 12px; font-family: inherit;
+}
+.del-btn:hover { color: var(--fail); background: var(--fail-bg); }
+
+/* === Stack + Tracking info panels === */
+.info-panel {
+  background: var(--card-2);
+  padding: 12px 20px 14px; border-bottom: 1px solid var(--line);
+  background: var(--hover);
+}
+.info-panel-label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px;
+}
+.info-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px 16px;
+}
+.info-cell { min-width: 0; }
+.info-key { font-size: 11.5px; color: var(--muted); margin-bottom: 1px; }
+.info-val { font-size: 13.5px; font-weight: 500; word-break: break-word; display: flex; align-items: center; gap: 6px; }
+.info-val.unknown { color: var(--muted); font-weight: 400; font-style: italic; }
+.info-val.installed { color: var(--ink); }
+.info-id {
+  font: 11.5px ui-monospace, "SF Mono", Menlo, monospace;
+  background: rgba(255, 255, 255, 0.08); color: var(--ink);
+  padding: 1px 6px; border-radius: 0;
+  display: inline-block; max-width: 100%;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  vertical-align: middle;
+}
+.info-id-line { margin-top: 4px; min-width: 0; }
+.dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.dot.installed { background: var(--pass); }
+.dot.missing { background: var(--line-strong); }
+
+.detail { padding: 8px 20px 18px; }
+.section { margin-top: 14px; }
+.section h3 {
+  font-size: 11.5px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--muted); margin: 0 0 4px;
+}
+.section table { width: 100%; border-collapse: collapse; }
+.section td { padding: 9px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.section td:first-child { width: 64px; padding-right: 8px; }
+.section.empty-section { display: none; }
+.status-tag {
+  display: inline-block; padding: 1px 7px; border-radius: 0;
+  font-size: 10.5px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.status-tag.pass { background: var(--pass-bg); color: var(--pass); }
+.status-tag.warn { background: var(--warn-bg); color: var(--warn); }
+.status-tag.fail { background: var(--fail-bg); color: var(--fail); }
+.status-tag.skip { background: var(--skip-bg); color: var(--skip); }
+.check-label { font-weight: 500; font-size: 13.5px; }
+.view-link {
+  font-size: 11.5px; color: var(--accent); cursor: pointer; margin-left: 6px;
+  font-weight: 500; opacity: 0.85; user-select: none;
+}
+.view-link:hover { opacity: 1; text-decoration: underline; }
+.override-tag {
+  font-size: 10.5px; color: var(--accent); background: var(--accent-soft);
+  padding: 1px 7px; margin-left: 6px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  border: 1px dashed var(--accent);
+}
+.auto-detect-note {
+  margin-top: 4px; font-size: 12px; color: var(--muted);
+  font-style: italic;
+}
+.check-msg { color: var(--ink); margin-top: 1px; font-size: 13px; word-break: break-word; }
+.fix {
+  color: var(--muted); margin-top: 4px; font-size: 12.5px;
+  border-left: 2px solid var(--line); padding-left: 9px;
+}
+
+/* === Issues view === */
+.issue-group {
+  background: var(--card); border: 1px solid var(--line); border-radius: 0;
+  padding: 18px 22px; margin-bottom: 14px; box-shadow: var(--shadow);
+}
+.issue-group .group-head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+}
+.issue-group h2 {
+  margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.005em; display: flex; align-items: center; gap: 9px;
+}
+.issue-group .section-tag {
+  font-size: 11px; color: var(--muted); text-transform: uppercase;
+  letter-spacing: 0.06em; font-weight: 600;
+}
+.issue-group .count-pill {
+  font-size: 13px; font-weight: 600; padding: 3px 10px; border-radius: 0;
+  font-variant-numeric: tabular-nums;
+}
+.issue-group .count-pill.warn { background: var(--warn-bg); color: var(--warn); }
+.issue-group .count-pill.fail { background: var(--fail-bg); color: var(--fail); }
+.issue-group .why, .issue-group .how {
+  margin-top: 12px; padding: 10px 14px; border-radius: 0; font-size: 13px;
+}
+.issue-group .why { background: var(--hover); color: var(--ink); }
+.issue-group .how { background: var(--accent-soft); color: var(--accent); }
+.issue-group .label {
+  display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 4px; opacity: 0.7;
+}
+.issue-group .how code, .issue-group .why code {
+  background: rgba(255, 255, 255, 0.08); padding: 1px 6px; border-radius: 0;
+  font-size: 12px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+.issue-group .affected {
+  margin-top: 14px; border-top: 1px solid var(--line); padding-top: 12px;
+}
+.issue-group .affected-label {
+  font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--muted); margin-bottom: 6px;
+}
+.issue-group .affected-row {
+  display: flex; justify-content: space-between; gap: 14px; padding: 7px 0;
+  border-top: 1px dashed var(--line); align-items: flex-start;
+}
+.issue-group .affected-row:first-of-type { border-top: none; }
+.issue-group .site-link {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px;
+  color: var(--accent); text-decoration: none; cursor: pointer; font-weight: 500;
+  flex-shrink: 0;
+}
+.issue-group .site-link:hover { text-decoration: underline; }
+.issue-group .site-msg { color: var(--muted); font-size: 12.5px; text-align: right; }
+
+/* === Modals === */
+.modal-bg { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 50; }
+.modal-bg.show { display: flex; }
+.modal {
+  background: var(--card); border-radius: 0; padding: 22px;
+  width: 100%; max-width: 460px; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  max-height: 90vh; overflow: auto;
+}
+.modal h2 { margin: 0 0 6px; font-size: 17px; font-weight: 600; }
+.modal .sub { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+.field { margin-bottom: 12px; }
+.field label { display: block; font-size: 12.5px; font-weight: 500; margin-bottom: 4px; color: var(--muted); }
+.field input, .field select {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--line-strong);
+  border-radius: 0; font-size: 14px; background: var(--card-2); color: var(--ink); font: inherit;
+}
+.field input:focus, .field select:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: var(--accent); }
+.modal .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+
+.refresh-cmd {
+  background: rgba(0, 0, 0, 0.4); color: var(--ink); border: 1px solid var(--line); padding: 10px 14px;
+  border-radius: 0; font: 12.5px ui-monospace, "SF Mono", Menlo, monospace;
+  margin: 8px 0; overflow-x: auto; white-space: pre; user-select: all;
+}
+.empty { text-align: center; padding: 40px 20px; color: var(--muted); }
+.help-text { color: var(--muted); font-size: 12.5px; margin-top: 6px; }
+.help-text code { background: var(--hover); padding: 1px 5px; border-radius: 0; }
+
+.drift-banner {
+  background: var(--accent-soft); border: 1px solid var(--accent);
+  padding: 10px 14px; border-radius: 0; margin-bottom: 16px;
+  display: none; align-items: center; gap: 10px; justify-content: space-between; flex-wrap: wrap;
+}
+.drift-banner.show { display: flex; }
+.drift-banner .msg { color: var(--accent); font-size: 13px; }
+
+.breadcrumb { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+.breadcrumb a { color: var(--muted); text-decoration: none; cursor: pointer; }
+.breadcrumb a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="app"></div>
+</div>
+
+<!-- Add domain modal -->
+<div class="modal-bg" id="modal-bg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <h2>Add a domain</h2>
+    <div class="sub">After adding, run the audit script in Terminal to scan it. The new domain will show as "not yet audited" until then.</div>
+    <div class="field">
+      <label for="f-domain">Domain (without https://)</label>
+      <input id="f-domain" placeholder="example.com" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="f-brand">Brand</label>
+      <select id="f-brand" onchange="onBrandChange()"></select>
+    </div>
+    <div class="field" id="newbrand-fields" style="display:none">
+      <label for="f-newbrand">New brand name</label>
+      <input id="f-newbrand" placeholder="e.g. Camba" autocomplete="off">
+      <label for="f-tagline" style="margin-top: 10px;">Tagline (optional)</label>
+      <input id="f-tagline" placeholder="One-line description" autocomplete="off">
+    </div>
+    <div class="actions">
+      <button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveDomain()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Refresh instructions modal -->
+<div class="modal-bg" id="refresh-modal-bg" onclick="if(event.target===this)closeModalById('refresh-modal-bg')">
+  <div class="modal" style="max-width: 580px;">
+    <h2>How to refresh the audit data</h2>
+    <div class="sub">The audit runs locally on your Mac (the cowork sandbox can't reach external sites). Two steps:</div>
+    <p style="font-weight: 500; margin: 14px 0 4px;">1. Run the audit in Terminal</p>
+    <div class="refresh-cmd">cd ~/Documents &amp;&amp; python3 marketing-audit.py</div>
+    <button class="btn primary" onclick="copyText('cd ~/Documents &amp;&amp; python3 marketing-audit.py')">Copy command</button>
+    <p style="font-weight: 500; margin: 18px 0 4px;">2. Tell Claude in chat to refresh the dashboard</p>
+    <div class="sub">Say something like: <em>"refresh the audit dashboard with the latest data"</em>. Claude reads the new JSON and updates this artifact.</div>
+    <p style="font-weight: 500; margin: 18px 0 4px;">Optional: one-time alias setup</p>
+    <div class="refresh-cmd">echo 'alias audit="cd ~/Documents &amp;&amp; python3 marketing-audit.py"' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</div>
+    <div class="help-text">After that, you can just type <code>audit</code> in Terminal each week.</div>
+    <div class="actions"><button class="btn primary" onclick="closeModalById('refresh-modal-bg')">Got it</button></div>
+  </div>
+</div>
+
+<!-- Apply changes modal -->
+<div class="modal-bg" id="apply-modal-bg" onclick="if(event.target===this)closeModalById('apply-modal-bg')">
+  <div class="modal" style="max-width: 620px;">
+    <h2>Apply your changes</h2>
+    <div class="sub">You've edited the dashboard locally. To make the audit script pick up these changes, write the new config to <code>~/Documents/audit-config.json</code>.</div>
+    <p style="font-weight: 500; margin: 14px 0 4px;">Easiest: paste this into Terminal</p>
+    <div class="refresh-cmd" id="apply-cmd"></div>
+    <button class="btn primary" onclick="copyText(document.getElementById('apply-cmd').textContent)">Copy command</button>
+    <div class="sub" style="margin-top: 14px;">After running, also run the audit (<code>python3 marketing-audit.py</code>) and ask Claude in chat to refresh the dashboard.</div>
+    <details style="margin-top: 14px;">
+      <summary style="cursor: pointer; font-size: 13px; color: var(--muted-strong);">Show raw JSON instead</summary>
+      <div class="refresh-cmd" id="apply-json" style="white-space: pre-wrap; max-height: 240px; overflow: auto;"></div>
+    </details>
+    <div class="actions"><button class="btn ghost" onclick="closeModalById('apply-modal-bg')">Close</button></div>
+  </div>
+</div>
+
+<!-- View asset modal (images, etc) -->
+<div class="modal-bg" id="view-modal-bg" onclick="if(event.target===this)closeModalById('view-modal-bg')">
+  <div class="modal" style="max-width: 760px;">
+    <h2 id="view-modal-title">Asset preview</h2>
+    <div class="sub" id="view-modal-sub"></div>
+    <div id="view-modal-body" style="text-align: center; padding: 16px 0;"></div>
+    <div class="actions">
+      <a class="btn" id="view-modal-open" target="_blank" rel="noopener">Open in new tab ↗</a>
+      <button class="btn ghost" onclick="closeModalById('view-modal-bg')">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== Data baked in by Claude =====
+const BAKED_CONFIG = __CONFIG_JSON__;
+const BAKED_DATA = __DATA_JSON__;
+const BAKED_HISTORY = __HISTORY_JSON__;
+const STORAGE_KEY = "marketing-audit-config-v1";
+
+const CHECK_LABELS = {
+  "1_https_ssl": ["Discoverability", "HTTPS + SSL cert"],
+  "2_robots": ["Discoverability", "robots.txt"],
+  "3_sitemap": ["Discoverability", "sitemap.xml"],
+  "4_canonical": ["Discoverability", "Canonical URL"],
+  "5_404": ["Discoverability", "Custom 404 page"],
+  "6_title": ["On-page SEO", "Title tag"],
+  "7_meta_desc": ["On-page SEO", "Meta description"],
+  "8_h1": ["On-page SEO", "Single H1"],
+  "9_heading_hierarchy": ["On-page SEO", "Heading hierarchy"],
+  "10_alt_text": ["On-page SEO", "Image alt text"],
+  "11_og_tags": ["Social sharing", "OpenGraph tags"],
+  "12_og_image": ["Social sharing", "og:image loads"],
+  "13_twitter_card": ["Social sharing", "Twitter card"],
+  "14_linkedin_preview": ["Social sharing", "LinkedIn preview"],
+  "15_schema_present": ["Structured data", "Schema present"],
+  "16_schema_valid": ["Structured data", "Schema valid"],
+  "17_page_weight": ["Performance + trust", "Page weight"],
+  "18_viewport": ["Performance + trust", "Mobile viewport"],
+  "19_favicon": ["Performance + trust", "Favicon"],
+  "20_security_headers": ["Performance + trust", "Security headers"],
+  "21_apex_www_redirect": ["Discoverability", "Apex / www consistency"],
+  "22_http_https_redirect": ["Discoverability", "HTTP → HTTPS redirect"],
+  "23_html_lang": ["On-page SEO", "HTML lang attribute"],
+  "24_meta_robots": ["Discoverability", "Meta robots / indexability"],
+  "25_email_dns": ["Performance + trust", "Email DNS (SPF + DMARC)"],
+  "26_placeholder_text": ["On-page SEO", "Placeholder text"],
+  "27_linkedin_insight": ["Tracking", "LinkedIn Insight Tag"]
+};
+
+// "Why it matters" + "How to fix" guides per check
+const CHECK_GUIDES = {
+  "1_https_ssl": {
+    why: "HTTPS is required for trust, SEO, and modern browser features. Expired certs cause hard browser warnings that lose visitors.",
+    how: "Use Cloudflare or Let's Encrypt for free auto-renewing certs. Make sure both apex (example.com) and www subdomain are covered. Renew at least 14 days before expiry."
+  },
+  "2_robots": {
+    why: "robots.txt tells search engines what they can crawl. A missing or misconfigured file can mean your site doesn't get indexed at all.",
+    how: "Add a file at <code>/robots.txt</code>. Minimum: <code>User-agent: *</code> + <code>Allow: /</code> + a <code>Sitemap:</code> line. Never ship to production with <code>Disallow: /</code> unless intentional."
+  },
+  "3_sitemap": {
+    why: "Sitemaps help search engines discover all your pages, especially deep ones that aren't linked from the homepage.",
+    how: "Most CMSs auto-generate sitemaps (Yoast for WordPress, Webflow built-in, Framer auto). Add a <code>Sitemap:</code> line to robots.txt pointing at it. Submit it in Google Search Console."
+  },
+  "4_canonical": {
+    why: "Prevents duplicate-content issues when the same page is reachable at multiple URLs (with/without www, http/https, with/without trailing slash).",
+    how: "Add <code>&lt;link rel=\"canonical\" href=\"https://yoursite.com/page\"&gt;</code> to every page's <code>&lt;head&gt;</code>. The URL should be the absolute, https version of the live page."
+  },
+  "5_404": {
+    why: "Soft-404s (where missing pages return HTTP 200) confuse search engines and waste crawl budget. A branded 404 page also reduces bounce rate.",
+    how: "Configure your framework or CMS to return a real <code>404</code> status code on missing pages. Design a branded 404 with a search box and links back to key pages."
+  },
+  "6_title": {
+    why: "The title is the first thing search engines and link previews show. Wrong length means it gets truncated or padded with junk.",
+    how: "Keep titles 30-60 characters. Format: <code>Primary keyword | Brand name</code>. Each page should have a unique title that actually describes the page."
+  },
+  "7_meta_desc": {
+    why: "The description is the blurb under your title in search results. It directly affects click-through rate.",
+    how: "Add <code>&lt;meta name=\"description\" content=\"...\"&gt;</code> with 120-160 characters. Compelling, specific, includes a benefit. Each page needs its own description."
+  },
+  "8_h1": {
+    why: "The H1 tells search engines and screen readers what the page is about. Missing or duplicate H1s confuse both.",
+    how: "One H1 per page. Make it specific to that page's topic — not \"Welcome\" or \"Home\". Style with CSS, not by jumping heading levels."
+  },
+  "9_heading_hierarchy": {
+    why: "Skipping heading levels (h1 → h3) breaks accessibility for screen readers and weakens content structure for search engines.",
+    how: "Use heading levels in order: h1 → h2 → h3, never skip. If something looks wrong visually, fix it with CSS. Heading levels are semantic, not stylistic."
+  },
+  "10_alt_text": {
+    why: "Alt text is required for accessibility (screen readers) and helps with image SEO. Missing alt is a WCAG failure.",
+    how: "Every <code>&lt;img&gt;</code> needs an <code>alt</code> attribute. Use <code>alt=\"\"</code> for purely decorative images, <code>alt=\"descriptive text\"</code> for content images. Don't keyword-stuff."
+  },
+  "11_og_tags": {
+    why: "OpenGraph tags control how your links look when shared on LinkedIn, Facebook, Slack, Discord, iMessage. Without them, shares look generic.",
+    how: "Add to <code>&lt;head&gt;</code>: <code>og:title</code>, <code>og:description</code>, <code>og:image</code> (1200×630 PNG/JPG), <code>og:url</code>. Use absolute URLs. Test with opengraph.xyz."
+  },
+  "12_og_image": {
+    why: "A broken og:image URL means shared links show a blank preview — worse than no image at all.",
+    how: "Verify the og:image URL returns 200 with image content-type. Use absolute URLs (<code>https://yoursite.com/og.png</code>, not <code>/og.png</code>). 1200×630 px is the LinkedIn/FB sweet spot."
+  },
+  "13_twitter_card": {
+    why: "Controls how X/Twitter renders shared links. Without it, shares show as text-only.",
+    how: "Add <code>&lt;meta name=\"twitter:card\" content=\"summary_large_image\"&gt;</code>. It reuses your og: tags so no extra image needed."
+  },
+  "14_linkedin_preview": {
+    why: "LinkedIn pulls og: tags. Missing any of og:title, og:description, og:image and the share preview looks broken.",
+    how: "Same fix as OpenGraph tags — set all three. After adding, force LinkedIn to re-cache via the Post Inspector tool: linkedin.com/post-inspector."
+  },
+  "15_schema_present": {
+    why: "Structured data (JSON-LD) helps search engines understand your content and can earn rich results — stars, FAQ accordions, sitelinks.",
+    how: "Add <code>&lt;script type=\"application/ld+json\"&gt;</code> blocks in <code>&lt;head&gt;</code>. Start simple with Organization + WebSite schema. Add Product, Article, FAQPage, etc. as needed."
+  },
+  "16_schema_valid": {
+    why: "Invalid JSON-LD is silently ignored by search engines — you get no benefit from it.",
+    how: "Validate at validator.schema.org or search.google.com/test/rich-results. Common bugs: invalid date formats, missing required fields, wrong @type values."
+  },
+  "17_page_weight": {
+    why: "Heavy pages hurt mobile users on slow connections and tank Core Web Vitals scores, which directly affects search ranking.",
+    how: "Compress images (WebP/AVIF), defer non-critical JS, audit fonts (subset, use 1-2 weights max), enable HTTP compression (gzip/Brotli) at your CDN/origin."
+  },
+  "18_viewport": {
+    why: "Without the viewport meta, mobile browsers render at desktop width — text is tiny, users have to pinch-zoom, ranking suffers.",
+    how: "Add <code>&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"&gt;</code> to every page's <code>&lt;head&gt;</code>. Should be one of the first tags."
+  },
+  "19_favicon": {
+    why: "Favicons appear in browser tabs, bookmarks, mobile home screens, search results. Missing them looks unprofessional.",
+    how: "Use realfavicongenerator.net to generate all formats from one source image. Add <code>&lt;link rel=\"icon\"&gt;</code> + <code>&lt;link rel=\"apple-touch-icon\"&gt;</code> in <code>&lt;head&gt;</code>."
+  },
+  "20_security_headers": {
+    why: "HSTS prevents downgrade attacks. X-Content-Type-Options: nosniff blocks MIME-sniffing exploits. Referrer-Policy controls what third parties learn about your visitors.",
+    how: "Easiest: add via Cloudflare → Rules → Transform Rules → Modify Response Header. Or set in your origin server config (nginx, Apache, etc.). Use securityheaders.com to verify after."
+  },
+  "21_apex_www_redirect": {
+    why: "When both <code>example.com</code> and <code>www.example.com</code> serve the same content without a redirect, Google sees them as separate URLs and may split your SEO signal. The canonical tag also has to agree with whichever direction the redirect goes.",
+    how: "Pick one (apex or www) as the live URL. 301-redirect the other to it. In Cloudflare: Rules → Redirect Rules → match the version you want to redirect → 301 to the canonical version. Make sure your <code>&lt;link rel=\"canonical\"&gt;</code> tag matches the live URL."
+  },
+  "22_http_https_redirect": {
+    why: "If <code>http://yoursite.com</code> serves content directly, visitors and search engines stay on insecure HTTP. That's a trust + SEO penalty.",
+    how: "Force HTTPS at your CDN. In Cloudflare: SSL/TLS → Edge Certificates → toggle on <strong>'Always Use HTTPS'</strong>. One click. No code change."
+  },
+  "23_html_lang": {
+    why: "Screen readers use the <code>lang</code> attribute to pick the right pronunciation engine. Search engines use it as a language signal. Missing it is a WCAG accessibility failure.",
+    how: "Add <code>lang</code> to the root html tag: <code>&lt;html lang=\"en\"&gt;</code> or for NZ English: <code>&lt;html lang=\"en-NZ\"&gt;</code>. In Astro this lives in your Layout.astro file."
+  },
+  "24_meta_robots": {
+    why: "<code>noindex</code> tells search engines to keep this page out of results. If shipped to production by mistake (common when staging configs leak), the page becomes invisible in search.",
+    how: "Search your codebase for <code>noindex</code>. Remove it on production pages. Common cause: a 'noindex on staging' env flag that wasn't toggled off in production. If a specific page genuinely shouldn't be indexed (e.g. /admin, /thank-you), keep noindex on that page only."
+  },
+  "25_email_dns": {
+    why: "Without SPF + DMARC TXT records on your domain, anyone can spoof emails 'from' your domain. Big phishing/trust risk + hurts deliverability of your real emails.",
+    how: "<strong>SPF</strong>: add a TXT record on the apex domain like <code>v=spf1 include:_spf.google.com ~all</code> (replace include with your email provider). <strong>DMARC</strong>: add a TXT record at <code>_dmarc.yourdomain.com</code> like <code>v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com</code>. Start with <code>p=none</code> to monitor before tightening to <code>p=quarantine</code> or <code>p=reject</code>. Tools like dmarcian.com or postmarkapp.com/mxtoolbox help generate the right records."
+  },
+  "26_placeholder_text": {
+    why: "Lorem ipsum and other placeholder text are leftovers from the design phase. Shipping them to production looks unprofessional and can affect trust + SEO (search engines may flag thin/junk content).",
+    how: "Search your codebase for the flagged terms. Replace with real copy. If a section isn't ready, hide it instead of shipping placeholder content. For 'TODO' items, move them out of the rendered page (a comment in the source is fine, visible text is not)."
+  },
+  "27_linkedin_insight": {
+    why: "The LinkedIn Insight Tag enables B2B retargeting (show ads to people who visited your site) and conversion tracking from LinkedIn Ads. Without it, you lose those audiences and can't measure LinkedIn campaign performance.",
+    how: "<strong>Recommended path: install via GTM</strong>, not hard-coded. In GTM: New Tag → Tag Type → 'LinkedIn Insight'. Get the partner ID from LinkedIn Campaign Manager → Account Assets → Insight Tag. Trigger on All Pages. Test via Tag Assistant. <em>Note: this check now peeks inside your GTM container script to detect LinkedIn Insight even when installed via GTM. False negatives are possible on heavily customised setups — verify in GTM if you're sure it's installed and the check still warns.</em>"
+  }
+};
+
+const STATUS_ORDER = { fail: 0, warn: 1, pass: 2, skip: 3 };
+
+let state = { config: null, data: BAKED_DATA };
+
+function esc(s) {
+  if (s == null) return "";
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+// NZ-friendly date format. Date-only stays plain ("4 May 2026").
+// When a time is present, UTC → NZ time with NZST/NZDT suffix.
+const _MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function fmtDate(s) {
+  if (!s) return "";
+  const m = String(s).match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}:\d{2})(?::\d{2}(?:\.\d+)?)?(?:\s*(.+))?)?/);
+  if (!m) return s;
+  // No time component — just date
+  if (!m[4]) {
+    return `${parseInt(m[3], 10)} ${_MONTHS[parseInt(m[2], 10) - 1]} ${m[1]}`;
+  }
+  // Has time — interpret as UTC, render in Pacific/Auckland
+  try {
+    const d = new Date(`${m[1]}-${m[2]}-${m[3]}T${m[4]}:00Z`);
+    if (isNaN(d.getTime())) throw new Error("bad date");
+    const fmt = new Intl.DateTimeFormat("en-NZ", {
+      timeZone: "Pacific/Auckland",
+      day: "numeric", month: "short", year: "numeric",
+      hour: "2-digit", minute: "2-digit", hour12: false,
+      timeZoneName: "short"
+    });
+    const parts = fmt.formatToParts(d);
+    const get = (t) => (parts.find(p => p.type === t) || {}).value || "";
+    return `${get("day")} ${get("month")} ${get("year")} at ${get("hour")}:${get("minute")} ${get("timeZoneName")}`;
+  } catch {
+    return s;
+  }
+}
+function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+function unslug(s) { return state.config.brands.find(b => slug(b.name) === s); }
+
+function loadConfig() {
+  let cfg;
+  try {
+    const ls = localStorage.getItem(STORAGE_KEY);
+    if (ls) {
+      const parsed = JSON.parse(ls);
+      if (parsed && Array.isArray(parsed.brands)) cfg = parsed;
+    }
+  } catch (e) {}
+  if (!cfg) cfg = JSON.parse(JSON.stringify(BAKED_CONFIG));
+  // Ensure overrides object exists for downstream "verify manually" UI
+  if (!cfg.overrides || typeof cfg.overrides !== "object") cfg.overrides = {};
+  return cfg;
+}
+function saveConfigToStorage() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.config)); }
+function isDirty() {
+  // Compare normalised forms (drop the _comment field which is just for human readers of the JSON)
+  const norm = (c) => {
+    const o = JSON.parse(JSON.stringify(c || {}));
+    if (o.overrides && o.overrides._comment) delete o.overrides._comment;
+    if (!o.overrides) o.overrides = {};
+    return JSON.stringify(o);
+  };
+  return norm(state.config) !== norm(BAKED_CONFIG);
+}
+function resetLocalChanges() {
+  if (!confirm("Discard your local changes and restore the last-synced config?")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  state.config = JSON.parse(JSON.stringify(BAKED_CONFIG));
+  if (!state.config.overrides) state.config.overrides = {};
+  route();
+}
+
+// === Manual verify (per-check override stored locally) ===
+function verifyCheckManually(domain, checkKey) {
+  const note = prompt("Optional note for this verification (e.g. 'Verified in GTM 2026-05-06'):", "Verified manually");
+  if (note === null) return; // user cancelled
+  if (!state.config.overrides) state.config.overrides = {};
+  if (!state.config.overrides[domain]) state.config.overrides[domain] = {};
+  state.config.overrides[domain][checkKey] = note || "Verified manually";
+  saveConfigToStorage();
+  route();
+}
+function unverifyCheck(domain, checkKey) {
+  if (!confirm("Remove the manual verification for this check?")) return;
+  if (state.config.overrides?.[domain]?.[checkKey] !== undefined) {
+    delete state.config.overrides[domain][checkKey];
+    if (Object.keys(state.config.overrides[domain]).length === 0) {
+      delete state.config.overrides[domain];
+    }
+  }
+  saveConfigToStorage();
+  route();
+}
+// Apply local overrides to a check at render time
+function applyLocalOverride(domain, checkKey, check) {
+  const override = state.config?.overrides?.[domain]?.[checkKey];
+  if (!override) return check;
+  const note = typeof override === "string" ? override : (override.note || "Manually verified");
+  const status = typeof override === "object" ? (override.status || "pass") : "pass";
+  return {
+    status,
+    message: note,
+    fix: "",
+    overridden: true,
+    auto_status: check.overridden ? check.auto_status : check.status,
+    auto_message: check.overridden ? check.auto_message : check.message,
+    view: check.view,
+    external_url: check.external_url,
+  };
+}
+
+// ===== Routing =====
+// Hash patterns:
+//   #/                       overview
+//   #/issues/warn|fail       global issues view, filtered
+//   #/brand/<slug>           brand detail (all checks)
+//   #/brand/<slug>/<filter>  brand detail filtered to fail|warn|pass
+function currentRoute() {
+  const h = (location.hash || "").replace(/^#/, "").replace(/^\//, "");
+  if (h.startsWith("issues/")) {
+    return { view: "issues", filter: h.substring("issues/".length) || "fail" };
+  }
+  if (h === "issues") return { view: "issues", filter: "fail" };
+  if (h.startsWith("brand/")) {
+    const rest = h.substring("brand/".length);
+    const parts = rest.split("/");
+    return { view: "brand", brandSlug: parts[0], filter: parts[1] || "all" };
+  }
+  return { view: "overview" };
+}
+function navigate(hash) {
+  if (location.hash !== hash) location.hash = hash;
+  else route();
+}
+window.addEventListener("hashchange", route);
+
+function route() {
+  const r = currentRoute();
+  if (r.view === "issues") {
+    renderIssues(r.filter);
+  } else if (r.view === "brand") {
+    const brand = unslug(r.brandSlug);
+    if (!brand) { navigate(""); return; }
+    renderBrandPage(brand, r.filter);
+  } else {
+    renderOverview();
+  }
+  window.scrollTo(0, 0);
+}
+
+// ===== Score helpers =====
+function scoreBand(pct) {
+  if (pct === null || pct === undefined) return "none";
+  return pct >= 80 ? "ok" : pct >= 50 ? "warn" : "bad";
+}
+// ===== History helpers =====
+function historyForDomain(domain) {
+  return (BAKED_HISTORY?.domains?.[domain]) || [];
+}
+// Brand history = average of percent across its domains, per shared date
+function historyForBrand(brand) {
+  const perDomain = brand.domains.map(d => historyForDomain(d));
+  const allDates = new Set();
+  for (const series of perDomain) for (const s of series) allDates.add(s.date);
+  const sortedDates = [...allDates].sort();
+  return sortedDates.map(date => {
+    const points = [];
+    for (const series of perDomain) {
+      const pt = series.find(x => x.date === date);
+      if (pt && pt.percent != null) points.push(pt.percent);
+    }
+    return points.length
+      ? { date, percent: Math.round(points.reduce((s, x) => s + x, 0) / points.length) }
+      : null;
+  }).filter(Boolean);
+}
+
+function renderSparkline(history, opts) {
+  opts = opts || {};
+  const w = opts.width || 80;
+  const h = opts.height || 22;
+  if (!history || history.length === 0) return "";
+  if (history.length === 1) {
+    return `<span class="spark-empty" title="Only one data point yet — re-run weekly to see trend">—</span>`;
+  }
+  const pad = 2;
+  const vals = history.map(s => s.percent ?? 0);
+  const minVal = Math.min(...vals, 0);
+  const maxVal = Math.max(...vals, 100);
+  const range = Math.max(1, maxVal - minVal);
+  const xs = history.map((_, i) => pad + (i / (history.length - 1)) * (w - 2 * pad));
+  const ys = history.map(s => h - pad - ((s.percent - minVal) / range) * (h - 2 * pad));
+  const points = xs.map((x, i) => `${x.toFixed(1)},${ys[i].toFixed(1)}`).join(" ");
+  const trend = (history[history.length - 1].percent || 0) - (history[0].percent || 0);
+  const stroke = trend > 0 ? "var(--pass)" : trend < 0 ? "var(--fail)" : "var(--muted)";
+  const lastX = xs[xs.length - 1];
+  const lastY = ys[ys.length - 1];
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-label="${history.length}-point trend">
+    <polyline points="${points}" fill="none" stroke="${stroke}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${lastX}" cy="${lastY}" r="2.2" fill="${stroke}"/>
+  </svg>`;
+}
+
+function renderTrendDelta(history) {
+  if (!history || history.length < 2) return "";
+  const a = history[0].percent || 0;
+  const b = history[history.length - 1].percent || 0;
+  const d = b - a;
+  if (d === 0) return `<span class="trend-delta flat">no change</span>`;
+  const sign = d > 0 ? "+" : "";
+  const cls = d > 0 ? "up" : "down";
+  const arrow = d > 0 ? "↑" : "↓";
+  return `<span class="trend-delta ${cls}">${arrow} ${sign}${d}% since ${fmtDate(history[0].date)}</span>`;
+}
+
+// Recompute a single domain's score with any local overrides applied.
+// Returns { pass, warn, fail, skip, total, percent } same shape as r.score.
+function scoreWithLocalOverrides(r) {
+  if (!r || !r.checks) return null;
+  let p = 0, w = 0, f = 0, sk = 0;
+  for (const [k, c] of Object.entries(r.checks)) {
+    const adj = applyLocalOverride(r.domain, k, c);
+    if (adj.status === "pass") p++;
+    else if (adj.status === "warn") w++;
+    else if (adj.status === "fail") f++;
+    else if (adj.status === "skip") sk++;
+  }
+  const total = p + w + f;
+  return { pass: p, warn: w, fail: f, skip: sk, total, percent: total ? Math.round((p / total) * 100) : 0 };
+}
+
+function aggregateBrandScore(brand, byDomain) {
+  let p = 0, w = 0, f = 0, t = 0, audited = 0, pending = 0;
+  for (const d of brand.domains) {
+    const r = byDomain[d];
+    if (r && r.score) {
+      const s = scoreWithLocalOverrides(r) || r.score;
+      p += s.pass; w += s.warn; f += s.fail;
+      t += s.total; audited++;
+    } else { pending++; }
+  }
+  const pct = t ? Math.round((p / t) * 100) : null;
+  return { pct, p, w, f, t, audited, pending };
+}
+
+// ===== Header / banner =====
+function commonHeaderHTML(opts) {
+  opts = opts || {};
+  const back = opts.showBack
+    ? `<div class="breadcrumb"><a class="btn btn-back" onclick="navigate('')">← Back to overview</a></div>`
+    : "";
+  return `
+    <div class="head">
+      <div>
+        ${back}
+        <h1>${esc(opts.title || "Site audit")}</h1>
+        <div class="meta">${opts.lastRun ? "Last audit: " + esc(fmtDate(opts.lastRun)) : "Not audited yet"}</div>
+      </div>
+      <div class="actions">
+        <button class="btn" onclick="showRefreshInstructions()">How to refresh data</button>
+        <button class="btn primary" onclick="openAddDomain()">+ Add domain</button>
+      </div>
+    </div>
+  `;
+}
+function driftBannerHTML() {
+  if (!isDirty()) return "";
+  return `
+    <div class="drift-banner show">
+      <div class="msg"><strong>Unsaved local changes.</strong> They're not in your audit script yet.</div>
+      <div style="display: flex; gap: 6px;">
+        <button class="btn warn-btn" onclick="showApplyChanges()">Show command to apply</button>
+        <button class="btn ghost" onclick="resetLocalChanges()">Discard</button>
+      </div>
+    </div>
+  `;
+}
+
+// ===== Overview view =====
+function renderOverview() {
+  const byDomain = {};
+  for (const r of state.data?.results || []) byDomain[r.domain] = r;
+
+  let totalP = 0, totalW = 0, totalF = 0, totalT = 0, totalAudited = 0, totalPending = 0;
+  for (const brand of state.config.brands) {
+    const a = aggregateBrandScore(brand, byDomain);
+    totalP += a.p; totalW += a.w; totalF += a.f; totalT += a.t; totalAudited += a.audited; totalPending += a.pending;
+  }
+  const overallPct = totalT ? Math.round((totalP / totalT) * 100) : 0;
+
+  const summaryHTML = `
+    <div class="summary">
+      <div class="stat"><div class="n">${overallPct}%</div><div class="l">Overall pass rate</div></div>
+      <div class="stat pass clickable" onclick="navigate('#/issues/pass')"><div class="n">${totalP}</div><div class="l">Pass</div></div>
+      <div class="stat warn clickable" onclick="navigate('#/issues/warn')"><div class="n">${totalW}</div><div class="l">Warn</div></div>
+      <div class="stat fail clickable" onclick="navigate('#/issues/fail')"><div class="n">${totalF}</div><div class="l">Fail</div></div>
+      <div class="stat"><div class="n">${totalAudited}/${totalAudited + totalPending}</div><div class="l">Sites audited</div></div>
+    </div>
+  `;
+
+  const tilesHTML = state.config.brands.length
+    ? state.config.brands.map(b => renderTile(b, byDomain)).join("")
+    : `<div class="empty">No brands yet. Click <strong>+ Add domain</strong> to get started.</div>`;
+
+  document.getElementById("app").innerHTML = `
+    ${commonHeaderHTML({ lastRun: state.data?.generated_at })}
+    ${driftBannerHTML()}
+    ${summaryHTML}
+    <div class="brand-grid">${tilesHTML}</div>
+  `;
+}
+
+function renderTile(brand, byDomain) {
+  const a = aggregateBrandScore(brand, byDomain);
+  const band = scoreBand(a.pct);
+  const totalSegs = a.p + a.w + a.f;
+  const passW = totalSegs ? (a.p / totalSegs) * 100 : 0;
+  const warnW = totalSegs ? (a.w / totalSegs) * 100 : 0;
+  const failW = totalSegs ? (a.f / totalSegs) * 100 : 0;
+  const isLocalBrand = !BAKED_CONFIG.brands.find(b => b.name === brand.name);
+  const localTag = isLocalBrand ? `<span class="tile-local">added locally</span>` : "";
+  const pendingNote = a.pending ? `<span style="color: var(--warn);">${a.pending} pending</span>` : "";
+
+  // Domain list with per-domain mini-score
+  const domainsList = brand.domains.map(d => {
+    const r = byDomain[d];
+    if (!r || !r.score) {
+      return `<div class="tile-domain"><a class="tile-domain-url" href="https://${esc(d)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(d)} <span class="ext">↗</span></a><span class="tile-domain-pct none">—</span></div>`;
+    }
+    const adjScore = scoreWithLocalOverrides(r) || r.score;
+    const dpct = adjScore.percent || 0;
+    const dband = scoreBand(dpct);
+    return `<div class="tile-domain"><a class="tile-domain-url" href="https://${esc(d)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(d)} <span class="ext">↗</span></a><span class="tile-domain-pct ${dband}">${dpct}%</span></div>`;
+  }).join("");
+
+  return `
+    <button class="tile" onclick="navigate('#/brand/${esc(slug(brand.name))}')" type="button">
+      <div class="tile-head">
+        <div>
+          <div class="tile-name">${esc(brand.name)} ${localTag}</div>
+          <div class="tile-tagline">${esc(brand.tagline || "")}</div>
+        </div>
+        <div class="tile-score ${band}">${a.pct === null ? "—" : a.pct + "%"}</div>
+      </div>
+      <div class="tile-bar" title="${a.p} pass / ${a.w} warn / ${a.f} fail">
+        ${a.p ? `<div class="seg pass" style="width:${passW}%"></div>` : ""}
+        ${a.w ? `<div class="seg warn" style="width:${warnW}%"></div>` : ""}
+        ${a.f ? `<div class="seg fail" style="width:${failW}%"></div>` : ""}
+      </div>
+      <div class="tile-domains">${domainsList}</div>
+      <div class="tile-foot">
+        <div class="tile-counts">
+          <span class="c-pass">${a.p}</span>
+          <span class="c-warn">${a.w}</span>
+          <span class="c-fail">${a.f}</span>
+        </div>
+        <div class="tile-spark">
+          ${renderSparkline(historyForBrand(brand), { width: 70, height: 18 })}
+          ${pendingNote ? pendingNote : ""}
+        </div>
+      </div>
+    </button>
+  `;
+}
+
+// ===== Issues view (global, grouped by check) =====
+function renderIssues(filter) {
+  const byDomain = {};
+  for (const r of state.data?.results || []) byDomain[r.domain] = r;
+
+  // Build domain → brand map for navigation
+  const domainToBrand = {};
+  for (const b of state.config.brands) for (const d of b.domains) domainToBrand[d] = b.name;
+
+  // Collect items by check key, scoped to chosen filter
+  const groups = {}; // checkKey -> [{domain, brand, message, fix, status}]
+  const validFilters = ["fail", "warn", "pass"];
+  if (!validFilters.includes(filter)) filter = "fail";
+
+  for (const result of state.data?.results || []) {
+    for (const [key, checkRaw] of Object.entries(result.checks || {})) {
+      const check = applyLocalOverride(result.domain, key, checkRaw);
+      if (check.status !== filter) continue;
+      (groups[key] ||= []).push({
+        domain: result.domain,
+        brand: domainToBrand[result.domain] || "—",
+        message: check.message,
+        fix: check.fix
+      });
+    }
+  }
+
+  // Sort group keys by descending count, then by check order (1_, 2_, ...)
+  const sortedKeys = Object.keys(groups).sort((a, b) => {
+    const diff = groups[b].length - groups[a].length;
+    if (diff !== 0) return diff;
+    return parseInt(a) - parseInt(b);
+  });
+
+  const totalCount = Object.values(groups).reduce((s, g) => s + g.length, 0);
+
+  const filterLabel = { fail: "fails", warn: "warnings", pass: "passing checks" }[filter];
+  const titleText = `All ${filterLabel}`;
+
+  const filterChipsHTML = `
+    <div class="filter-bar">
+      <span class="filter-label">Show:</span>
+      <button class="chip fail-chip ${filter === "fail" ? "active" : ""}" onclick="navigate('#/issues/fail')">Fails</button>
+      <button class="chip warn-chip ${filter === "warn" ? "active" : ""}" onclick="navigate('#/issues/warn')">Warnings</button>
+      <button class="chip pass-chip ${filter === "pass" ? "active" : ""}" onclick="navigate('#/issues/pass')">Passing</button>
+    </div>
+  `;
+
+  let groupsHTML;
+  if (!sortedKeys.length) {
+    groupsHTML = `<div class="empty">Nothing to show. ${filter === "fail" ? "Zero fails — nice." : filter === "warn" ? "Zero warnings — even nicer." : "No passing checks (yet)."}</div>`;
+  } else {
+    groupsHTML = sortedKeys.map(k => renderIssueGroup(k, groups[k], filter)).join("");
+  }
+
+  document.getElementById("app").innerHTML = `
+    ${commonHeaderHTML({ showBack: true, lastRun: state.data?.generated_at, title: titleText })}
+    ${driftBannerHTML()}
+    ${filterChipsHTML}
+    <div style="color: var(--muted); font-size: 13px; margin-bottom: 14px;">
+      ${totalCount} item${totalCount === 1 ? "" : "s"} across ${sortedKeys.length} check type${sortedKeys.length === 1 ? "" : "s"}
+    </div>
+    ${groupsHTML}
+  `;
+}
+
+function renderIssueGroup(checkKey, items, filter) {
+  const [section, label] = CHECK_LABELS[checkKey] || ["Other", checkKey];
+  const guide = CHECK_GUIDES[checkKey] || { why: "", how: "" };
+  const countClass = filter === "fail" ? "fail" : filter === "warn" ? "warn" : "pass";
+
+  const rowsHTML = items.map(it => `
+    <div class="affected-row">
+      <a class="site-link" onclick="navigate('#/brand/${esc(slug(it.brand))}')">${esc(it.domain)}</a>
+      <div class="site-msg">${esc(it.message || "")}</div>
+    </div>
+  `).join("");
+
+  const whyHTML = guide.why
+    ? `<div class="why"><div class="label">Why it matters</div>${guide.why}</div>` : "";
+  const howHTML = guide.how
+    ? `<div class="how"><div class="label">How to fix</div>${guide.how}</div>` : "";
+
+  return `
+    <div class="issue-group">
+      <div class="group-head">
+        <h2>${esc(label)} <span class="section-tag">· ${esc(section)}</span></h2>
+        <span class="count-pill ${countClass}">${items.length} site${items.length === 1 ? "" : "s"}</span>
+      </div>
+      ${whyHTML}
+      ${howHTML}
+      <div class="affected">
+        <div class="affected-label">Affected sites</div>
+        ${rowsHTML}
+      </div>
+    </div>
+  `;
+}
+
+// ===== Brand detail view =====
+function renderBrandPage(brand, filter) {
+  const byDomain = {};
+  for (const r of state.data?.results || []) byDomain[r.domain] = r;
+  const a = aggregateBrandScore(brand, byDomain);
+  const band = scoreBand(a.pct);
+  const isLocalBrand = !BAKED_CONFIG.brands.find(b => b.name === brand.name);
+  const localTag = isLocalBrand ? ` <span class="pill local">added locally</span>` : "";
+  const slugName = slug(brand.name);
+
+  if (!["all", "fail", "warn", "pass"].includes(filter)) filter = "all";
+
+  const filterChipsHTML = `
+    <div class="filter-bar">
+      <span class="filter-label">Show:</span>
+      <button class="chip ${filter === "all" ? "active" : ""}" onclick="navigate('#/brand/${esc(slugName)}')">All checks</button>
+      <button class="chip fail-chip ${filter === "fail" ? "active" : ""}" onclick="navigate('#/brand/${esc(slugName)}/fail')">Fails (${a.f})</button>
+      <button class="chip warn-chip ${filter === "warn" ? "active" : ""}" onclick="navigate('#/brand/${esc(slugName)}/warn')">Warnings (${a.w})</button>
+      <button class="chip pass-chip ${filter === "pass" ? "active" : ""}" onclick="navigate('#/brand/${esc(slugName)}/pass')">Passing (${a.p})</button>
+    </div>
+  `;
+
+  const domainsHTML = brand.domains.length
+    ? brand.domains.map(d => renderDomainCard(d, byDomain[d], brand.name, filter)).join("")
+    : `<div class="empty" style="background: var(--card); border: 1px solid var(--line); border-radius: 0;">No domains for this brand yet. <a href="#" onclick="openAddDomain('${esc(brand.name)}'); return false;">Add one</a>.</div>`;
+
+  document.getElementById("app").innerHTML = `
+    ${commonHeaderHTML({ showBack: true, lastRun: state.data?.generated_at, title: brand.name })}
+    ${driftBannerHTML()}
+    <div class="brand-detail-head">
+      <div class="top">
+        <div>
+          <h2>${esc(brand.name)}${localTag}</h2>
+          <div class="tagline">${esc(brand.tagline || "")}</div>
+        </div>
+      </div>
+      <div class="score-row">
+        <div class="pct ${band}">${a.pct === null ? "—" : a.pct + "%"}</div>
+        <div class="pills">
+          <button class="pill pass clickable" onclick="navigate('#/brand/${esc(slugName)}/pass')">${a.p} pass</button>
+          <button class="pill warn clickable" onclick="navigate('#/brand/${esc(slugName)}/warn')">${a.w} warn</button>
+          <button class="pill fail clickable" onclick="navigate('#/brand/${esc(slugName)}/fail')">${a.f} fail</button>
+          ${a.pending ? `<span class="pill none">${a.pending} pending</span>` : ""}
+        </div>
+        ${(() => {
+          const bh = historyForBrand(brand);
+          if (!bh.length) return "";
+          return `<div style="display:flex; align-items:center; gap:10px; margin-left:auto;">
+            ${renderSparkline(bh, { width: 140, height: 30 })}
+            ${renderTrendDelta(bh)}
+          </div>`;
+        })()}
+      </div>
+    </div>
+    ${filterChipsHTML}
+    ${domainsHTML}
+  `;
+}
+
+function renderDomainCard(domain, result, brandName, filter) {
+  const bakedDomains = new Set();
+  for (const b of BAKED_CONFIG.brands) for (const d of b.domains) bakedDomains.add(d);
+  const isLocal = !bakedDomains.has(domain);
+  const localTag = isLocal ? `<span class="pill local">added locally</span>` : "";
+
+  if (!result) {
+    return `
+      <div class="domain pending">
+        <div class="domain-head">
+          <div class="left">
+            <a class="url" href="https://${esc(domain)}" target="_blank" rel="noopener">${esc(domain)} <span class="ext">↗</span></a>
+            <span class="pill none">not yet audited</span>
+            ${localTag}
+          </div>
+          <div class="right">
+            <button class="del-btn" onclick="removeDomain('${esc(brandName)}', '${esc(domain)}')">Remove</button>
+          </div>
+        </div>
+        <div class="detail" style="padding: 14px 20px 18px; color: var(--muted); font-size: 13px;">
+          Run the audit script to scan this domain. Click <strong>How to refresh data</strong> above for the command.
+        </div>
+      </div>
+    `;
+  }
+
+  const s = scoreWithLocalOverrides(result) || result.score || {};
+  const pct = s.percent || 0;
+  const band = scoreBand(pct);
+
+  // Group checks by section, optionally filter by status (apply local overrides first)
+  const sections = {};
+  let visibleCount = 0;
+  for (const [key, checkRaw] of Object.entries(result.checks || {})) {
+    const check = applyLocalOverride(domain, key, checkRaw);
+    if (filter !== "all" && check.status !== filter) continue;
+    const [section, label] = CHECK_LABELS[key] || ["Other", key];
+    (sections[section] ||= []).push([label, check, key]);
+    visibleCount++;
+  }
+
+  let detailHTML;
+  if (visibleCount === 0) {
+    detailHTML = `<div class="detail" style="color: var(--muted); font-size: 13px;">No ${filter === "fail" ? "fails" : filter === "warn" ? "warnings" : "passing checks"} for this domain.</div>`;
+  } else {
+    detailHTML = `<div class="detail">${Object.entries(sections).map(([name, items]) => `
+      <div class="section">
+        <h3>${esc(name)}</h3>
+        <table>
+          ${items.map(([label, cRaw, key]) => {
+            // Apply local override (set via "Verify manually" UI) on top of script result
+            const c = applyLocalOverride(domain, key, cRaw);
+            const guide = CHECK_GUIDES[key] || {};
+            const viewLink = c.view
+              ? `<a class="view-link" onclick="showAssetModalFromCheck('${esc(key)}', '${esc(domain)}'); return false;">View ↗</a>`
+              : "";
+            const externalLink = c.external_url
+              ? `<a class="view-link" href="${esc(c.external_url)}" target="_blank" rel="noopener">Open ↗</a>`
+              : "";
+            const overrideTag = c.overridden
+              ? `<span class="override-tag" title="Manually verified — auto-detection said: ${esc(c.auto_status || '')} — ${esc(c.auto_message || '')}">manually verified</span>`
+              : "";
+            // "Verify manually" button only on warns/fails that aren't already overridden
+            const verifyBtn = (!c.overridden && (c.status === "warn" || c.status === "fail"))
+              ? `<a class="view-link verify-link" onclick="verifyCheckManually('${esc(domain)}', '${esc(key)}'); return false;">Verify manually ✓</a>`
+              : "";
+            const unverifyBtn = c.overridden
+              ? `<a class="view-link verify-link" onclick="unverifyCheck('${esc(domain)}', '${esc(key)}'); return false;">Unverify</a>`
+              : "";
+            return `
+              <tr>
+                <td><span class="status-tag ${c.status}">${c.status}</span></td>
+                <td>
+                  <div class="check-label">${esc(label)} ${viewLink} ${externalLink} ${overrideTag} ${verifyBtn} ${unverifyBtn}</div>
+                  <div class="check-msg">${esc(c.message || "")}</div>
+                  ${c.fix ? `<div class="fix">${esc(c.fix)}</div>` : ""}
+                  ${c.overridden ? `<div class="auto-detect-note">Auto-detection said: <strong>${esc(c.auto_status || '')}</strong> — ${esc(c.auto_message || '')}</div>` : ""}
+                </td>
+              </tr>
+            `;
+          }).join("")}
+        </table>
+      </div>
+    `).join("")}</div>`;
+  }
+
+  const stackHTML = renderStackPanel(result.stack);
+  const trackingHTML = renderTrackingPanel(result.tracking);
+  const dh = historyForDomain(domain);
+  const historyHTML = dh.length
+    ? `<div class="history-row">
+        <div class="label">Health over time</div>
+        ${renderSparkline(dh, { width: 160, height: 28 })}
+        ${renderTrendDelta(dh)}
+      </div>`
+    : "";
+
+  // Live URL line (e.g. "→ Live: www.x.com" only when there's a redirect to a different host)
+  const liveUrl = result.live_url || "";
+  const liveHost = liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const showLive = liveHost && liveHost !== domain;
+  const liveHTML = showLive
+    ? `<div class="live-url">→ Live: <a href="${esc(liveUrl)}" target="_blank" rel="noopener">${esc(liveHost)}</a></div>`
+    : "";
+
+  return `
+    <div class="domain">
+      <div class="domain-head">
+        <div class="left">
+          <div style="display: flex; flex-direction: column; gap: 2px;">
+            <a class="url" href="https://${esc(domain)}" target="_blank" rel="noopener">${esc(domain)} <span class="ext">↗</span></a>
+            ${liveHTML}
+          </div>
+          <div class="pills">
+            <span class="pill pass">${s.pass || 0} pass</span>
+            <span class="pill warn">${s.warn || 0} warn</span>
+            <span class="pill fail">${s.fail || 0} fail</span>
+            ${s.skip ? `<span class="pill skip">${s.skip} skip</span>` : ""}
+            ${localTag}
+          </div>
+        </div>
+        <div class="right">
+          <span class="pct ${band}">${pct}%</span>
+          <button class="del-btn" onclick="removeDomain('${esc(brandName)}', '${esc(domain)}')">Remove</button>
+        </div>
+      </div>
+      ${historyHTML}${stackHTML}${trackingHTML}
+      ${detailHTML}
+    </div>
+  `;
+}
+
+function renderStackPanel(stack) {
+  if (!stack || stack.error) return "";
+  const items = [
+    ["Framework", stack.framework],
+    ["CSS", stack.css],
+    ["Hosting / CDN", stack.cdn],
+    ["CMS / builder", stack.cms],
+    ["Registrar", stack.registrar],
+  ];
+  // Skip the panel entirely if everything is null
+  const anyDetected = items.some(([_, v]) => v);
+  if (!anyDetected) return "";
+  return `
+    <div class="info-panel">
+      <div class="info-panel-label">Stack</div>
+      <div class="info-grid">
+        ${items.map(([label, v]) => `
+          <div class="info-cell">
+            <div class="info-key">${esc(label)}</div>
+            <div class="info-val ${v ? '' : 'unknown'}">${v ? esc(v) : "Not detected"}</div>
+          </div>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderTrackingPanel(tracking) {
+  if (!tracking || tracking.error) return "";
+  const trackers = [
+    ["ga4", "Google Analytics 4"],
+    ["gtm", "Google Tag Manager"],
+    ["gsc_verification", "Search Console"],
+    ["posthog", "PostHog"],
+    ["linkedin_insight", "LinkedIn Insight"],
+    ["meta_pixel", "Meta Pixel"],
+  ];
+  const rows = trackers.map(([key, label]) => {
+    const t = tracking[key];
+    if (!t) return null;
+    const installed = t.installed === true;
+    const idLine = t.id ? `<div class="info-id-line"><span class="info-id" title="${esc(t.id)}">${esc(t.id)}</span></div>` : "";
+    return `
+      <div class="info-cell">
+        <div class="info-key">${esc(label)}</div>
+        <div class="info-val ${installed ? 'installed' : 'unknown'}">
+          ${installed ? '<span class="dot installed"></span> Installed' : '<span class="dot missing"></span> Not detected'}
+        </div>
+        ${idLine}
+      </div>
+    `;
+  }).filter(Boolean);
+  if (!rows.length) return "";
+  return `
+    <div class="info-panel">
+      <div class="info-panel-label">Tracking</div>
+      <div class="info-grid">${rows.join("")}</div>
+    </div>
+  `;
+}
+
+// ===== Add/remove domain =====
+function openAddDomain(presetBrand) {
+  document.getElementById("f-domain").value = "";
+  document.getElementById("f-newbrand").value = "";
+  document.getElementById("f-tagline").value = "";
+  const sel = document.getElementById("f-brand");
+  sel.innerHTML = state.config.brands.map(b => `<option value="${esc(b.name)}">${esc(b.name)}</option>`).join("") +
+    `<option value="__new__">+ New brand…</option>`;
+  if (presetBrand) sel.value = presetBrand;
+  document.getElementById("newbrand-fields").style.display = "none";
+  document.getElementById("modal-bg").classList.add("show");
+  setTimeout(() => document.getElementById("f-domain").focus(), 50);
+}
+function closeModal() { document.getElementById("modal-bg").classList.remove("show"); }
+function closeModalById(id) { document.getElementById(id).classList.remove("show"); }
+function onBrandChange() {
+  const v = document.getElementById("f-brand").value;
+  document.getElementById("newbrand-fields").style.display = v === "__new__" ? "block" : "none";
+}
+function saveDomain() {
+  let domain = document.getElementById("f-domain").value.trim().toLowerCase();
+  domain = domain.replace(/^https?:\/\//, "").replace(/\/.*$/, "");
+  if (!domain || !domain.includes(".")) {
+    alert("Enter a valid domain like 'example.com'");
+    return;
+  }
+  let brandName = document.getElementById("f-brand").value;
+  if (brandName === "__new__") {
+    const nb = document.getElementById("f-newbrand").value.trim();
+    if (!nb) { alert("Enter a brand name"); return; }
+    if (state.config.brands.find(b => b.name === nb)) { alert("That brand already exists"); return; }
+    const tagline = document.getElementById("f-tagline").value.trim();
+    state.config.brands.push({ name: nb, tagline, domains: [domain] });
+    brandName = nb;
+  } else {
+    const brand = state.config.brands.find(b => b.name === brandName);
+    if (brand.domains.includes(domain)) { alert("That domain is already in this brand"); return; }
+    brand.domains.push(domain);
+  }
+  saveConfigToStorage();
+  closeModal();
+  route();
+}
+function removeDomain(brandName, domain) {
+  if (!confirm(`Remove ${domain} from ${brandName}?`)) return;
+  const brand = state.config.brands.find(b => b.name === brandName);
+  if (brand) brand.domains = brand.domains.filter(d => d !== domain);
+  saveConfigToStorage();
+  route();
+}
+
+// ===== Modals =====
+function showRefreshInstructions() { document.getElementById("refresh-modal-bg").classList.add("show"); }
+function showApplyChanges() {
+  // Clone config so we can strip the _comment field without mutating state
+  const cfgForExport = JSON.parse(JSON.stringify(state.config));
+  if (cfgForExport.overrides && cfgForExport.overrides._comment) {
+    delete cfgForExport.overrides._comment;
+  }
+  // Drop empty overrides object for cleanliness
+  if (cfgForExport.overrides && Object.keys(cfgForExport.overrides).length === 0) {
+    delete cfgForExport.overrides;
+  }
+  const json = JSON.stringify(cfgForExport, null, 2);
+  const cmd = `cat > ~/Documents/audit-config.json << 'JSON_EOF'\n${json}\nJSON_EOF`;
+  document.getElementById("apply-cmd").textContent = cmd;
+  document.getElementById("apply-json").textContent = json;
+  document.getElementById("apply-modal-bg").classList.add("show");
+}
+// === Asset preview modal ===
+let _viewAssets = [];   // current assets list for the modal
+let _viewIndex = 0;
+
+function showAssetModalFromCheck(checkKey, domain) {
+  // Look up the check in current data
+  const r = (state.data?.results || []).find(x => x.domain === domain);
+  if (!r) return;
+  const c = (r.checks || {})[checkKey];
+  if (!c?.view) return;
+  const list = Array.isArray(c.view) ? c.view : [c.view];
+  // Normalise to {label, url}
+  _viewAssets = list.map((v, i) => typeof v === "string" ? { label: `Asset ${i + 1}`, url: v } : v);
+  _viewIndex = 0;
+  renderAssetModal();
+}
+
+function renderAssetModal() {
+  const a = _viewAssets[_viewIndex];
+  if (!a) return;
+  document.getElementById("view-modal-title").textContent = a.label || "Asset preview";
+  document.getElementById("view-modal-sub").textContent = a.url;
+  document.getElementById("view-modal-open").href = a.url;
+  let switcher = "";
+  if (_viewAssets.length > 1) {
+    switcher = `<div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-bottom:12px;">` +
+      _viewAssets.map((x, i) =>
+        `<button class="btn ${i === _viewIndex ? 'primary' : ''}" style="font-size:11.5px; padding:4px 10px;" onclick="_viewIndex=${i}; renderAssetModal()">${esc(x.label)}</button>`
+      ).join("") + `</div>`;
+  }
+  document.getElementById("view-modal-body").innerHTML = switcher +
+    `<img src="${esc(a.url)}" style="max-width:100%; max-height:60vh; background: repeating-conic-gradient(#1B2536 0% 25%, #2A3548 0% 50%) 50% / 20px 20px; padding: 12px; display: inline-block;" alt="${esc(a.label)}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">` +
+    `<div style="display:none; padding: 24px; color: var(--muted); font-size: 13px;">Asset can't be previewed inline (probably not an image, or CORS-blocked). Use "Open in new tab" above.</div>`;
+  document.getElementById("view-modal-bg").classList.add("show");
+}
+
+function copyText(t) {
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(t);
+  } else {
+    const ta = document.createElement("textarea");
+    ta.value = t; document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); document.body.removeChild(ta);
+  }
+  alert("Copied. Paste it in Terminal.");
+}
+
+// ===== Init =====
+state.config = loadConfig();
+route();
+</script>
+</body>
+</html>

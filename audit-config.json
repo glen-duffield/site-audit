@@ -1,0 +1,77 @@
+{
+  "brands": [
+    {
+      "name": "Agentic Intelligence",
+      "tagline": "Building and scaling AI ventures",
+      "domains": [
+        "agenticintelligence.co.nz"
+      ]
+    },
+    {
+      "name": "Adiso",
+      "tagline": "AI Operating System for Financial Advice",
+      "domains": [
+        "adiso.co.nz"
+      ]
+    },
+    {
+      "name": "xOS",
+      "tagline": "AI-native sales enablement",
+      "domains": [
+        "xos.co.nz"
+      ]
+    },
+    {
+      "name": "BuildFoundry",
+      "tagline": "Build faster with AI",
+      "domains": [
+        "buildfoundry.co.nz"
+      ]
+    },
+    {
+      "name": "Workable",
+      "tagline": "AI-Voice Agent Data Capture",
+      "domains": [
+        "workable.co.nz"
+      ]
+    },
+    {
+      "name": "TakeoffQS",
+      "tagline": "Faster takeoffs. Faster quotes.",
+      "domains": [
+        "takeoffqs.com"
+      ]
+    },
+    {
+      "name": "TrafficSense",
+      "tagline": "AI-powered Traffic Management Plan authoring",
+      "domains": [
+        "trafficsense.co.nz",
+        "trafficsense.com.au"
+      ]
+    },
+    {
+      "name": "Camba",
+      "tagline": "AI-first CRM for NZ vehicle dealers.",
+      "domains": [
+        "camba.ai"
+      ]
+    },
+    {
+      "name": "Thatch",
+      "tagline": "",
+      "domains": [
+        "thatch.cloud"
+      ]
+    }
+  ],
+  "overrides": {
+    "_comment": "Manually verified findings that auto-detection got wrong. Format: domain → check_key → message string (becomes pass) OR {status, note}.",
+    "takeoffqs.com": {
+      "5_404": "Branded 404 verified manually — has navigation, popular pages, branded CTAs"
+    },
+    "thatch.cloud": {
+      "5_404": "Branded 404 verified manually"
+    }
+  }
+}
